@@ -1,0 +1,14 @@
+/* This rule hides the display of inherited types */
+.typelist.inheritance {
+    display: none;
+}
+
+/* This rule hides the display of implemented types */
+/*.typelist.implements {
+    display: none;
+}*/
+
+/* This rule hides the display of derived types */
+/*.typelist.derived {
+    display: none;
+}*/

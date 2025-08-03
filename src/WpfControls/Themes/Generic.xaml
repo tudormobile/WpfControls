@@ -6,7 +6,6 @@
     <!-- Controls, Styles, and additional UI elements -->
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/WindowStateControl.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/TitleBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
-
 </ResourceDictionary>

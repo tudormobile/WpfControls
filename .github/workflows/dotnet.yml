@@ -22,7 +22,7 @@ jobs:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         
     - name: Unit tests
-      run: dotnet test --logger "trx;LogFilePrefix=output" --collect "Code Coverage" 
+      run: dotnet test --logger "trx;LogFilePrefix=output" --collect "Code Coverage" --settings "test.runsettings"
 
     - name: Build
       run: dotnet build -c Release
