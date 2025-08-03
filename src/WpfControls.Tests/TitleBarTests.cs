@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace WpfControls.Tests
 {
-    [TestClass]
+    [STATestClass]
     public class TitleBarTests
     {
         [STATestMethod]

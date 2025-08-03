@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace WpfControls.Tests
 {
-    [TestClass]
+    [STATestClass]
     public class WindowStateControlTests
     {
         [STATestMethod]
