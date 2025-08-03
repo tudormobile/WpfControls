@@ -1,0 +1,12 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Tudormobile.Wpf.Controls">
+
+    <!-- Controls, Styles, and additional UI elements -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/WindowStateControl.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+
+</ResourceDictionary>

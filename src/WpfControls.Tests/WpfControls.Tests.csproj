@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="MSTest" Version="4.0.0-preview.25372.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WpfControls\WpfControls.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <Using Include="System.Globalization" />
+    <Using Include="Tudormobile.Wpf.Controls"/>
+    <Using Include="Tudormobile.Wpf.Converters"/>
+    <Using Include="Tudormobile.Wpf.Commands"/>
+    <Using Include="Tudormobile.Wpf.Helpers"/>
+  </ItemGroup>
+
+</Project>

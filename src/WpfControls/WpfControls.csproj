@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+<!-- Version -->
+<PropertyGroup>
+  <build>$([System.DateTime]::Now.ToString('yyMM'))</build>
+  <rev>$([System.DateTime]::Now.ToString('100dd'))</rev>
+  <ver>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)\..\..\version.txt').Trim())</ver>
+  <AssemblyName>Tudormobile.$(MSBuildProjectName)</AssemblyName>
+  <RootNamespace>Tudormobile.Wpf.Controls</RootNamespace>
+</PropertyGroup>
+
+  <!-- Package Properties -->
+  <PropertyGroup>
+    <AssemblyVersion>$(ver).$(build).$(rev)</AssemblyVersion>
+    <Version>$(ver).$(build)</Version>
+    <Company>Tudormobile, LLC</Company>
+    <Authors>WH Tudor</Authors>
+    <Product>Tudormobile WpfControls</Product>
+    <Description>Tudormobile WPF Control Library</Description>
+    <Copyright>Copyright © 2025 Tudormobile, LLC</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>WPF;WPFControls;Tudormobile;Windows;UI</PackageTags>
+    <RepositoryUrl>https://github.com/tudormobile/WpfControls</RepositoryUrl>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\docs\README.md" Pack="true" PackagePath="\" />
+    <InternalsVisibleTo Include="WpfControls.Tests" />
+  </ItemGroup>
+
+  <!-- Version Build Output -->
+  <Target Name="WriteVersion" BeforeTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <WriteLinesToFile Lines="$(Version)" File="$(BaseOutputPath)\$(Configuration)\ver.txt" Overwrite="true" />
+  </Target>
+
+</Project>
