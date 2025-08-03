@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace WpfControls.Tests
 {
@@ -39,12 +40,15 @@ namespace WpfControls.Tests
         [STATestMethod]
         public void OnApplyTemplateTest()
         {
-            var target = new WindowStateControl();
-            var b = new Border() { Child = target };
-            b.Measure(new Size(100, 100));
-            b.Arrange(new Rect(0, 0, 100, 100));
-            Assert.AreEqual(100, b.ActualHeight);
-            Assert.AreEqual(100, b.ActualWidth);
+            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
+            {
+                var target = new WindowStateControl();
+                var b = new Border() { Child = target };
+                b.Measure(new Size(100, 100));
+                b.Arrange(new Rect(0, 0, 100, 100));
+                Assert.AreEqual(100, b.ActualHeight);
+                Assert.AreEqual(100, b.ActualWidth);
+            }));
         }
 
     }
