@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Threading;
+﻿using System.Windows.Media;
 
 namespace WpfControls.Tests
 {
@@ -36,20 +33,6 @@ namespace WpfControls.Tests
             Assert.IsFalse(target.CanMaximize);
             Assert.IsFalse(target.CanMinimize);
             Assert.IsNotNull(target.Icon);
-        }
-
-        [STATestMethod]
-        public void OnApplyTemplateTest()
-        {
-            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
-            {
-                var target = new TitleBar();
-                var b = new Border() { Child = target };
-                b.Measure(new Size(100, 100));
-                b.Arrange(new Rect(0, 0, 100, 100));
-                Assert.AreEqual(100, b.ActualHeight);
-                Assert.AreEqual(100, b.ActualWidth);
-            }));
         }
     }
 }

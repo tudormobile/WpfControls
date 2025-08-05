@@ -1,3 +1,4 @@
+@echo off
 del /s *.trx
 dotnet test --logger trx;LogFilePrefix=output --collect "Code Coverage" --settings test.runsettings
 if %errorlevel% neq 0 exit /b %errorlevel%

@@ -13,6 +13,7 @@ Tool dependencies are installed/updated as follows:
 dotnet build
 dotnet test
 ```
+Locally, you can use the *build.cmd* script to build everything from the command line.
 ## Package and deploy
 Building a release configuration will generate nuget package(s) in the respective output folders.
 ## Projects
