@@ -34,8 +34,10 @@ namespace WpfControlsGallery
                 Foreground = Brushes.White,
                 StatusAreaContent = border
             };
+            var bar = new ProgressBar() { Width = 90, Height = 20, IsIndeterminate = false, Minimum = 0, Maximum = 100, Value = 50 };
+            Tudormobile.Wpf.Behaviors.ProgressBar.SetCornerRadius(bar, new CornerRadius(10));
             var content = new Grid();
-            content.Children.Add(new Button() { Width = 90, Height = 24, Content = "Press Me" });
+            content.Children.Add(bar);
             appWindow.Content = content;
             appWindow.Show();
         }
