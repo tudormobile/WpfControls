@@ -9,10 +9,6 @@
     <Color x:Key="CloseBoxBackgroundPressedColor">#d43c2c</Color>
     <sys:Double x:Key="MouseOverBackgroundPercentage">0.3</sys:Double>
     <sys:Double x:Key="MousePressBackgroundPercentage">0.2</sys:Double>
-    <TextBlock x:Key="CloseBoxContent" Text="&#xe8bb;"/>
-    <TextBlock x:Key="MinimizeBoxContent" Text="&#xE921;"/>
-    <TextBlock x:Key="MaximizeBoxContent" Text="&#xE922;"/>
-
     <!-- Plain-style buttons for the WindowStateControl -->
     <Style TargetType="{x:Type Button}" x:Key="closeButtonStyle">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -122,9 +118,9 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <StackPanel Orientation="Horizontal" >
-                            <Button Padding="{TemplateBinding Padding}" Style="{StaticResource plainButtonStyle}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" x:Name="minButton" Content="{StaticResource MinimizeBoxContent}" MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource self}}" MinHeight="{TemplateBinding MinHeight}" ToolTip="Minimize"/>
-                            <Button Padding="{TemplateBinding Padding}" Style="{StaticResource plainButtonStyle}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" x:Name="maxButton" Content="{StaticResource MaximizeBoxContent}" MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource self}}" MinHeight="{TemplateBinding MinHeight}" />
-                            <Button Padding="{TemplateBinding Padding}" Style="{StaticResource closeButtonStyle}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" x:Name="closeButton" Content="{StaticResource CloseBoxContent}" MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource self}}" MinHeight="{TemplateBinding MinHeight}" ToolTip="Close" />
+                            <Button Padding="{TemplateBinding Padding}" Style="{StaticResource plainButtonStyle}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" x:Name="minButton" Content="&#xE921;" MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource self}}" MinHeight="{TemplateBinding MinHeight}" ToolTip="Minimize"/>
+                            <Button Padding="{TemplateBinding Padding}" Style="{StaticResource plainButtonStyle}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" x:Name="maxButton" Content="&#xE922;" MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource self}}" MinHeight="{TemplateBinding MinHeight}" />
+                            <Button Padding="{TemplateBinding Padding}" Style="{StaticResource closeButtonStyle}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" x:Name="closeButton" Content="&#xe8bb;" MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource self}}" MinHeight="{TemplateBinding MinHeight}" ToolTip="Close" />
                         </StackPanel>
                     </Border>
                 </ControlTemplate>

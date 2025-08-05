@@ -139,6 +139,21 @@ public class WindowStateControl : Control
             }
             addRemoveDragHandler();
             setButtonStates();
+            if (_closeButton != null && VisualTreeHelper.GetChild(_window, 0) is Border b && b.CornerRadius.TopRight != 0)
+            {
+                _closeButton.LayoutUpdated += closeButton_LayoutUpdated;
+            }
+        }
+    }
+
+    private void closeButton_LayoutUpdated(object? sender, EventArgs e)
+    {
+        if (_closeButton != null && VisualTreeHelper.GetChild(_window, 0) is Border b && b.CornerRadius.TopRight != 0)
+        {
+            if (_closeButton.Template.FindName("border", _closeButton) is Border closeButtonBorder && closeButtonBorder.CornerRadius.TopRight != b.CornerRadius.TopRight)
+            {
+                closeButtonBorder.CornerRadius = new CornerRadius(0, b.CornerRadius.TopRight, 0, 0);
+            }
         }
     }
 
