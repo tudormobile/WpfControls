@@ -7,11 +7,25 @@
         xmlns:controls="clr-namespace:Tudormobile.Wpf.Controls;assembly=Tudormobile.WpfControls"
         mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None" Icon="/icon.png"
         Title="MainWindow Title" Height="450" Width="800">
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <controls:TitleBar Content="This is direct content" Background="Azure" BorderBrush="Blue" BorderThickness="0,0,0,1" />
+        <StackPanel Orientation="Vertical" Grid.Row ="1" HorizontalAlignment="Center" Margin="10">
+            <controls:Spinner IsEnabled="True" Margin="4" />
+            <controls:InfoBar Title="Title" Message="This is the message text; this is the text that explains the message to the user." IsOpen="True" Severity="Informational"/>
+            <controls:InfoBar Title="Title" Message="This is the message text; this is the text that explains the message to the user." IsOpen="True" Severity="Success"/>
+            <controls:InfoBar Title="Title" Message="This is the message text; this is the text that explains the message to the user." IsOpen="True" Severity="Warning"/>
+            <controls:InfoBar Title="Title" Message="This is the message text; this is the text that explains the message to the user." IsOpen="True" Severity="Error"/>
+            <controls:ToggleSwitch Content="{x:Null}" OnContent="{x:Null}" />
+            <controls:ToggleSwitch />
+            <controls:ToggleSwitch Content="This is the OFF content" OnContent="This is the ON content" />
+            <controls:ToggleSwitch Content="This is the OFF content" OnContent="This is the ON content" />
+            <controls:ToggleSwitch IsEnabled="False"/>
+            <controls:ToggleSwitch IsEnabled="False" IsChecked="True"/>
+            <CheckBox IsEnabled="false">This is a test</CheckBox>
+        </StackPanel>
     </Grid>
 </Window>
