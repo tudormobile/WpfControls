@@ -19,10 +19,10 @@
   <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="System.Globalization" />
-    <Using Include="Tudormobile.Wpf.Controls"/>
-    <Using Include="Tudormobile.Wpf.Converters"/>
-    <Using Include="Tudormobile.Wpf.Commands"/>
-    <Using Include="Tudormobile.Wpf.Helpers"/>
+    <Using Include="Tudormobile.Wpf.Controls" />
+    <Using Include="Tudormobile.Wpf.Converters" />
+    <Using Include="Tudormobile.Wpf.Commands" />
+    <Using Include="Tudormobile.Wpf.Helpers" />
   </ItemGroup>
 
 </Project>
