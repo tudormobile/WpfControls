@@ -26,6 +26,7 @@
             <controls:ToggleSwitch IsEnabled="False"/>
             <controls:ToggleSwitch IsEnabled="False" IsChecked="True"/>
             <CheckBox IsEnabled="false">This is a test</CheckBox>
+            <controls:FontIcon Glyph="&#xE701;" FontSize="24" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Window>
