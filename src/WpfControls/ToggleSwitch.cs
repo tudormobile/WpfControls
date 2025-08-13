@@ -41,7 +41,7 @@ namespace Tudormobile.Wpf.Controls
         /// <summary>
         /// Content for the 'On' state of the switch
         /// </summary>
-        public object OnContent
+        public object? OnContent
         {
             get { return (object)GetValue(OnContentProperty); }
             set { SetValue(OnContentProperty, value); }

@@ -5,11 +5,14 @@
 
     <!-- Controls, Styles, and additional UI elements -->
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/WindowStateControl.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/TitleBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/AppWindow.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/Card.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/FontIcon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/InfoBar.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/ToggleSwitch.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/Spinner.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/TitleBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/ToggleSwitch.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/WindowStateControl.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
 </ResourceDictionary>
