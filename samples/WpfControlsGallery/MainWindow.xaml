@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfControlsGallery"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:controls="clr-namespace:Tudormobile.Wpf.Controls;assembly=Tudormobile.WpfControls"
         xmlns:behaviors="clr-namespace:Tudormobile.Wpf.Behaviors;assembly=Tudormobile.WpfControls"
         mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None" Icon="/icon.png"
@@ -28,6 +29,9 @@
         </Grid.RowDefinitions>
         <controls:TitleBar Content="This is direct content" Background="Azure" BorderBrush="Blue" BorderThickness="0,0,0,1" />
         <StackPanel Orientation="Vertical" Grid.Row ="1" HorizontalAlignment="Center" Margin="10">
+            <controls:InlineObjectEditor BorderBrush="Red" BorderThickness="1" DisplayMemberPath="TestDate.DayOfWeek" Opened="InlineObjectEditor_Opened" Closed="InlineObjectEditor_Closed" Closing="InlineObjectEditor_Closing" >
+                <DatePicker SelectedDate="{Binding TestDate, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Window}}" />
+            </controls:InlineObjectEditor>
             <controls:Spinner IsEnabled="True" Margin="4" />
             <controls:InfoBar Title="Title" Message="This is the message text; this is the text that explains the message to the user." IsOpen="True" Severity="Informational"/>
             <controls:InfoBar Title="Title" Message="This is the message text; this is the text that explains the message to the user." IsOpen="True" Severity="Success"/>
