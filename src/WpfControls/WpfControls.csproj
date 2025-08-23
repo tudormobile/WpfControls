@@ -20,12 +20,13 @@
   <PropertyGroup>
     <AssemblyVersion>$(ver).$(build).$(rev)</AssemblyVersion>
     <Version>$(ver).$(build)</Version>
-    <Company>Tudormobile, LLC</Company>
+    <Company>Tudormobile</Company>
     <Authors>WH Tudor</Authors>
     <Product>Tudormobile WpfControls</Product>
     <Description>Tudormobile WPF Control Library</Description>
-    <Copyright>Copyright © 2025 Tudormobile, LLC</Copyright>
+    <Copyright>Copyright © 2025 Bill Tudor</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>WPF;WPFControls;Tudormobile;Windows;UI</PackageTags>
     <RepositoryUrl>https://github.com/tudormobile/WpfControls</RepositoryUrl>
