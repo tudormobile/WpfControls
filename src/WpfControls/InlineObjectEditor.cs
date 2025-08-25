@@ -24,6 +24,37 @@ public class InlineObjectEditor : ContentControl
     }
 
     /// <summary>
+    /// Location of the pencil/edit glyph (if any) relative to the header text.
+    /// </summary>
+    public GlyphLocations GlyphLocation
+    {
+        get { return (GlyphLocations)GetValue(GlyphLocationProperty); }
+        set { SetValue(GlyphLocationProperty, value); }
+    }
+
+    /// <inheritdoc/>
+    public static readonly DependencyProperty GlyphLocationProperty = DependencyProperty
+        .Register("GlyphLocation",
+        typeof(GlyphLocations),
+        typeof(InlineObjectEditor),
+        new PropertyMetadata(GlyphLocations.Right));
+
+    /// <summary>
+    /// Location of the pencil/edit glyph relative to the header text. Default is to the right.
+    /// </summary>
+    public enum GlyphLocations
+    {
+        /// <summary>
+        /// To the right of the header content.
+        /// </summary>
+        Right = 0,
+        /// <summary>
+        /// To the left of the header content.
+        /// </summary>
+        Left = 1,
+    }
+
+    /// <summary>
     /// Gets or sets a path to a value on the source object to serve as the visual representation of the object.
     /// </summary>
     public string DisplayMemberPath

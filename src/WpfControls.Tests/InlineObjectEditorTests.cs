@@ -9,6 +9,7 @@
             var target = new InlineObjectEditor();
             Assert.AreEqual(".", target.DisplayMemberPath);
             Assert.IsFalse(target.IsOpen);
+            Assert.AreEqual(InlineObjectEditor.GlyphLocations.Right, target.GlyphLocation, "Must default to (Right) for triggers to work properly.");
         }
     }
 }

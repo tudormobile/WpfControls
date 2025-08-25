@@ -29,8 +29,8 @@
         </Grid.RowDefinitions>
         <controls:TitleBar Content="This is direct content" Background="Azure" BorderBrush="Blue" BorderThickness="0,0,0,1" />
         <StackPanel Orientation="Vertical" Grid.Row ="1" HorizontalAlignment="Center" Margin="10">
-            <controls:InlineObjectEditor BorderBrush="Red" BorderThickness="1" DisplayMemberPath="TestDate.DayOfWeek" Opened="InlineObjectEditor_Opened" Closed="InlineObjectEditor_Closed" Closing="InlineObjectEditor_Closing" >
-                <DatePicker SelectedDate="{Binding TestDate, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Window}}" />
+            <controls:InlineObjectEditor GlyphLocation="Left" BorderBrush="Red" BorderThickness="1" DisplayMemberPath="TestDate.DayOfWeek" Opened="InlineObjectEditor_Opened" Closed="InlineObjectEditor_Closed" Closing="InlineObjectEditor_Closing" >
+                <DatePicker Margin="10,4,4,4" SelectedDate="{Binding TestDate, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Window}}" />
             </controls:InlineObjectEditor>
             <controls:Spinner IsEnabled="True" Margin="4" />
             <controls:InfoBar Title="Title" Message="This is the message text; this is the text that explains the message to the user." IsOpen="True" Severity="Informational"/>

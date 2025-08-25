@@ -2,18 +2,6 @@
                     xmlns:local="clr-namespace:Tudormobile.Wpf.Controls"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="Expander.Static.Circle.Stroke" Color="#FF333333"/>
-    <SolidColorBrush x:Key="Expander.Static.Circle.Fill" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="Expander.Static.Arrow.Stroke" Color="#FF333333"/>
-    <SolidColorBrush x:Key="Expander.MouseOver.Circle.Stroke" Color="#FF5593FF"/>
-    <SolidColorBrush x:Key="Expander.MouseOver.Circle.Fill" Color="#FFF3F9FF"/>
-    <SolidColorBrush x:Key="Expander.MouseOver.Arrow.Stroke" Color="#FF000000"/>
-    <SolidColorBrush x:Key="Expander.Pressed.Circle.Stroke" Color="#FF3C77DD"/>
-    <SolidColorBrush x:Key="Expander.Pressed.Circle.Fill" Color="#FFD9ECFF"/>
-    <SolidColorBrush x:Key="Expander.Pressed.Arrow.Stroke" Color="#FF000000"/>
-    <SolidColorBrush x:Key="Expander.Disabled.Circle.Stroke" Color="#FFBCBCBC"/>
-    <SolidColorBrush x:Key="Expander.Disabled.Circle.Fill" Color="#FFE6E6E6"/>
-    <SolidColorBrush x:Key="Expander.Disabled.Arrow.Stroke" Color="#FF707070"/>
     <Style TargetType="{x:Type local:InlineObjectEditor}">
         <Style.Resources>
             <Style x:Key="EditorTitleStyle" TargetType="{x:Type ToggleButton}">
@@ -28,6 +16,42 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock x:Name="EditGlyph" Grid.Column="1" FontFamily="Segoe Fluent Icons" Text="&#xE70F;" VerticalAlignment="Center" Visibility="Hidden"/>
                                     <ContentPresenter Grid.Column="0" HorizontalAlignment="Left" Margin="0,0,4,0" RecognizesAccessKey="True" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsEnabled" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Visibility" TargetName="EditGlyph" Value="Visible"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter Property="Background" TargetName="EditGlyph" Value="#20202020"/>
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Text" TargetName="EditGlyph" Value="&#xE73E;"/>
+                                    <Setter Property="Visibility" TargetName="EditGlyph" Value="Visible"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="EditorLeftTitleStyle" TargetType="ToggleButton">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Border Padding="{TemplateBinding Padding}">
+                                <Grid Background="Transparent">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="EditGlyph" Grid.Column="0" FontFamily="Segoe Fluent Icons" Text="&#xE70F;" VerticalAlignment="Center" Visibility="Hidden"/>
+                                    <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" Margin="4,0,0,0" RecognizesAccessKey="True" VerticalAlignment="Center"/>
                                 </Grid>
                             </Border>
                             <ControlTemplate.Triggers>
@@ -83,6 +107,9 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsOpen" Value="True">
                             <Setter Property="Visibility" TargetName="EditorContent" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="GlyphLocation" Value="Left">
+                            <Setter Property="Style" TargetName="EditorTitle" Value="{StaticResource EditorLeftTitleStyle}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
