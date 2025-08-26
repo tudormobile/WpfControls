@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Tudormobile.Wpf.Controls.Converters;
+using Tudormobile.Wpf.Converters;
 
 namespace Tudormobile.Wpf.Controls;
 

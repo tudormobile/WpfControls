@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace Tudormobile.Wpf.Controls.Converters;
+namespace Tudormobile.Wpf.Converters;
 
 /// <summary>
 /// Provides a type converter to convert string representations of card transition types into corresponding animations
