@@ -29,7 +29,7 @@
         </Grid.RowDefinitions>
         <controls:TitleBar Content="This is direct content" Background="Azure" BorderBrush="Blue" BorderThickness="0,0,0,1" />
         <StackPanel Orientation="Vertical" Grid.Row ="1" HorizontalAlignment="Center" Margin="10">
-            <controls:InlineObjectEditor GlyphLocation="Left" BorderBrush="Red" BorderThickness="1" DisplayMemberPath="TestDate.DayOfWeek" Opened="InlineObjectEditor_Opened" Closed="InlineObjectEditor_Closed" Closing="InlineObjectEditor_Closing" >
+            <controls:InlineObjectEditor GlyphLocation="Left" BorderBrush="Red" BorderThickness="1" DisplayMemberPath="TestDate.DayOfWeek" Opened="inlineObjectEditor_Opened" Closed="inlineObjectEditor_Closed" Closing="inlineObjectEditor_Closing" >
                 <DatePicker Margin="10,4,4,4" SelectedDate="{Binding TestDate, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Window}}" />
             </controls:InlineObjectEditor>
             <controls:Spinner IsEnabled="True" Margin="4" />
@@ -53,11 +53,17 @@
                     <TextBlock Text="A" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </ContentControl>
             </Border>
-            <controls:Card Header="This is the header" Padding="10" MouseDown="Card_MouseDown"
+            <controls:Card Header="This is the header" Padding="10" MouseDown="card_MouseDown"
                            Footer="This is the footer" Transition="SlideRight"
                            Background="LightGray" BorderBrush="Black" BorderThickness="1" CornerRadius="5">
                 <TextBlock TextWrapping="Wrap" Text="This is the content of the card. It can contain any UI element." Margin="10"/>
             </controls:Card>
+            <controls:ConfirmButton Margin="10" Content="Press to Confirm" Width="100" Click="confirmButton_Click"/>
+            <controls:ConfirmButton Margin="10" Width="100"
+                                    Content="Press to Confirm Save"
+                                    Message="Do you want to save the current document?"
+                                    ButtonText="Save|Don't Save|Cancel"
+                                    Click="confirmButton_Click"/>
         </StackPanel>
     </Grid>
 </Window>

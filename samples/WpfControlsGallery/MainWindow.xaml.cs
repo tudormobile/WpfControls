@@ -8,7 +8,7 @@ namespace WpfControlsGallery
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private DateTime _testDate = new DateTime(1964, 3, 11);
+        private DateTime _testDate = new(1964, 3, 11);
         public MainWindow()
         {
             InitializeComponent();
@@ -35,28 +35,33 @@ namespace WpfControlsGallery
             });
         }
 
-        private void Card_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void card_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ((Tudormobile.Wpf.Controls.Card)sender).Content = DateTime.Now;
         }
 
-        private void InlineObjectEditor_Opened(object sender, RoutedEventArgs e)
+        private void inlineObjectEditor_Opened(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Opened");
         }
 
-        private void InlineObjectEditor_Closed(object sender, RoutedEventArgs e)
+        private void inlineObjectEditor_Closed(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Closed");
         }
 
-        private void InlineObjectEditor_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void inlineObjectEditor_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var result = MessageBox.Show("Closing", "Closing", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;
             }
+        }
+
+        private void confirmButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Confirmed");
         }
     }
 }
