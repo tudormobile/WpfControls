@@ -60,7 +60,8 @@ public class GlyphAdorner : Adorner
                     CultureInfo.CurrentCulture,
                     FlowDirection.LeftToRight,
                     new Typeface("Segoe Fluent Icons"),
-                    (AdornedElement as Control)?.FontSize ?? 12,
+                    //((AdornedElement as Control)?.FontSize ?? 12) * .75,
+                    8,
                     (AdornedElement as Control)?.Foreground ?? Brushes.Black,
                     VisualTreeHelper.GetDpi(this).PixelsPerDip)).Width, _formattedText.Height);
 
@@ -72,17 +73,40 @@ public class GlyphAdorner : Adorner
     /// property being set to <see langword="false"/>.</remarks>
     /// <param name="adornedElement">The <see cref="Control"/> to which the adornment is applied. 
     /// This adorned UIElement cannot be <see langword="null"/>.</param>
-    public GlyphAdorner(UIElement adornedElement) : base(adornedElement) { IsHitTestVisible = false; }
+    public GlyphAdorner(UIElement adornedElement) : base(adornedElement)
+    {
+        if (adornedElement is not FrameworkElement)
+        {
+            throw new ArgumentException("The adorned element must be a FrameworkElement.", nameof(adornedElement));
+        }
+        IsHitTestVisible = false;
+    }
 
     /// <inheritdoc/>
     protected override void OnRender(DrawingContext drawingContext)
     {
+        var element = (FrameworkElement)AdornedElement;
+        var xPos = element.ActualWidth - GlyphSize.Width;
+        var yPos = element.ActualHeight / 2 - GlyphSize.Height / 2;
+
         if (AdornedElement is TextBoxBase tb && !string.IsNullOrEmpty(_glyph))
         {
-            var xPos = tb.Padding.Left - GlyphSize.Width;
-            var yPos = tb.ActualHeight / 2 - GlyphSize.Height / 2;
-            drawingContext.DrawText(_formattedText, new Point(xPos, yPos));
+            xPos = tb.Padding.Left - GlyphSize.Width;
+            yPos = tb.ActualHeight / 2 - GlyphSize.Height / 2;
+            //drawingContext.DrawText(_formattedText, new Point(xPos, yPos));
         }
+        //else //if (AdornedElement is ButtonBase button && !string.IsNullOrEmpty(_glyph))
+        //{
+        //    var xPos = button.ActualWidth - GlyphSize.Width - 4;
+        //    var yPos = button.ActualHeight / 2 - GlyphSize.Height / 2;
+        //drawingContext.DrawRectangle
+        //    (
+        //        new SolidColorBrush(Color.FromArgb(1, 255, 255, 255)),
+        //        new Pen(new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)), 1),
+        //        new Rect(xPos - 2, 2, GlyphSize.Width + 4, button.ActualHeight - 4)
+        //    );
+        drawingContext.DrawText(_formattedText, new Point(xPos - 4, yPos));
+        //}
     }
 
     /// <inheritdoc/>

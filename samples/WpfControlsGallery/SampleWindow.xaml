@@ -1,0 +1,96 @@
+﻿<Window x:Class="WpfControlsGallery.SampleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfControlsGallery" ThemeMode="Light"
+        xmlns:behaviors="clr-namespace:Tudormobile.Wpf.Behaviors;assembly=Tudormobile.WpfControls"
+        mc:Ignorable="d"
+        Title="SampleWindow" Height="450" Width="800">
+    <UniformGrid>
+        <StackPanel>
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                    <Setter Property="Margin" Value="6,2"/>
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Width" Value="110"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Template" Value="{DynamicResource TextButtonTemplate}"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button>
+                <TextBlock Text="First Item" />
+                <behaviors:Popup.PopupContent>
+                    <ContextMenu Placement="Right">
+                        <MenuItem Header="Sub Item 1" />
+                        <MenuItem Header="Sub Item 2" />
+                        <MenuItem Header="Sub Item 3" />
+                        <MenuItem Header="Sub Item 4" />
+                    </ContextMenu>
+                </behaviors:Popup.PopupContent>
+            </Button>
+            <Button Content="Second item"/>
+            <Button Content="Third item">
+                <behaviors:Popup.PopupContent>
+                    <Popup Placement="Bottom" PopupAnimation="Scroll" AllowsTransparency="True">
+                        <StackPanel Orientation="Vertical" Background="White">
+                            <TextBlock Text="This is a Popup" Margin="10" FontSize="18" FontWeight="SemiBold"/>
+                            <Button Content="Click me" Margin="10"/>
+                        </StackPanel>
+                    </Popup>
+                </behaviors:Popup.PopupContent>
+            </Button>
+            <Button Content="Fourth item"/>
+        </StackPanel>
+        <StackPanel>
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                    <Setter Property="Margin" Value="6,2"/>
+                    <Setter Property="Width" Value="110"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="Fifth item">
+                <behaviors:Popup.PopupContent>
+                    <UniformGrid Rows="2" Columns="2" MinWidth="200">
+                        <TextBlock Text="This"/>
+                        <TextBlock Text="is"/>
+                        <TextBlock Text="a"/>
+                        <TextBox/>
+                        <TextBlock Text="grid"/>
+                    </UniformGrid>
+                </behaviors:Popup.PopupContent>
+            </Button>
+            <Button Content="Sixth item"/>
+            <Button Content="Seventh item"/>
+            <Button Content="Eight item">
+                <behaviors:Popup.PopupContent>
+                    <ContextMenu Placement="Right">
+                        <MenuItem Header="Sub Item 1" />
+                        <MenuItem Header="Sub Item 2" />
+                        <MenuItem Header="Sub Item 3" />
+                        <MenuItem Header="Sub Item 4" />
+                    </ContextMenu>
+                </behaviors:Popup.PopupContent>
+            </Button>
+            <Button Content="Ninth item">
+                <behaviors:Popup.PopupContent>
+                    <ContextMenu>
+                        <MenuItem Header="Sub Item 1" />
+                        <MenuItem Header="Sub Item 2" />
+                        <MenuItem Header="Sub Item 3" />
+                        <MenuItem Header="Sub Item 4" />
+                    </ContextMenu>
+                </behaviors:Popup.PopupContent>
+            </Button>
+        </StackPanel>
+    </UniformGrid>
+</Window>

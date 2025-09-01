@@ -7,7 +7,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:controls="clr-namespace:Tudormobile.Wpf.Controls;assembly=Tudormobile.WpfControls"
         xmlns:behaviors="clr-namespace:Tudormobile.Wpf.Behaviors;assembly=Tudormobile.WpfControls"
-        mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None" Icon="/icon.png"
+        mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None" Icon="/icon.png" 
         Title="MainWindow Title" Height="850" Width="800">
     <Window.Resources>
     </Window.Resources>
@@ -64,6 +64,31 @@
                                     Message="Do you want to save the current document?"
                                     ButtonText="Save|Don't Save|Cancel"
                                     Click="confirmButton_Click"/>
+            <controls:SplitButton Content="Click Me" Width="100" Margin="4" x:Name="split" Placement="Right">
+                <controls:SplitButton.Popup>
+                    <!--<ListView MinWidth="100">
+                        <ListViewItem Content="Option 1" />
+                        <ListViewItem Content="Option 2" />
+                        <ListViewItem Content="Option 3" />
+                    </ListView>-->
+                    <ContextMenu>
+                        <MenuItem Header="SplitButton Menu Option 1" />
+                        <MenuItem Header="SplitButton Menu Option 2" />
+                        <MenuItem Header="SplitButton Menu Option 3" />
+                    </ContextMenu>
+
+                </controls:SplitButton.Popup>
+                <controls:SplitButton.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Context Option 1" />
+                        <MenuItem Header="Context Option 2" />
+                        <MenuItem Header="Context Option 3" />
+                    </ContextMenu>
+                </controls:SplitButton.ContextMenu>
+            </controls:SplitButton>
+                <Button Margin="10" Width="100" Loaded="Button_Loaded" Content="ClickIt">
+                
+                </Button>
         </StackPanel>
     </Grid>
 </Window>

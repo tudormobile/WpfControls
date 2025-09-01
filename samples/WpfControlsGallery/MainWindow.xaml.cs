@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace WpfControlsGallery
 {
@@ -62,6 +64,27 @@ namespace WpfControlsGallery
         private void confirmButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Confirmed");
+        }
+
+        private void Button_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button b)
+            {
+                var layer = AdornerLayer.GetAdornerLayer(b);
+                var g = new Tudormobile.Wpf.Adorners.GlyphAdorner(b)
+                {
+                    Glyph = "\uF08E",
+                    Padding = new Thickness(0, 0, 4, 0),
+                    SnapsToDevicePixels = true,
+                    IsHitTestVisible = true,
+                };
+                g.MouseDown += (s, args) =>
+                {
+                    MessageBox.Show("Glyph clicked");
+                    args.Handled = true;
+                };
+                layer.Add(g);
+            }
         }
     }
 }
