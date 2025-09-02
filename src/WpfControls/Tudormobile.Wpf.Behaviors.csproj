@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+<!-- Version -->
+<PropertyGroup>
+  <build>$([System.DateTime]::Now.ToString('yyMM'))</build>
+  <rev>$([System.DateTime]::Now.ToString('100dd'))</rev>
+  <ver>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)\..\..\version.txt').Trim())</ver>
+  <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+  <RootNamespace>Tudormobile.Wpf.Behaviors</RootNamespace>
+</PropertyGroup>
+
+  <!-- Package Properties -->
+  <PropertyGroup>
+    <AssemblyVersion>$(ver).$(build).$(rev)</AssemblyVersion>
+    <Version>$(ver).$(build)</Version>
+    <Company>Tudormobile</Company>
+    <Authors>WH Tudor</Authors>
+    <Product>Tudormobile Wpf Behaviors</Product>
+    <Description>Tudormobile WPF Behaviors Library</Description>
+    <Copyright>Copyright © 2025 Bill Tudor</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>WPF;WPFControls;Behaviors;Tudormobile;Windows;UI</PackageTags>
+    <RepositoryUrl>https://github.com/tudormobile/WpfControls</RepositoryUrl>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\docs\README.md" Pack="true" PackagePath="\" />
+    <Compile Remove="*.cs"/>
+    <Compile Remove="Commands/**/*.cs"/>
+    <Compile Remove="Converters/**/*.cs"/>
+    <Compile Remove="Helpers/**/*.cs"/>
+    <Compile Remove="Properties/*"/>
+    <Page Remove="Themes/*.xaml"/>
+  </ItemGroup>
+
+  <!-- Version Build Output -->
+  <Target Name="WriteVersion" BeforeTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <WriteLinesToFile Lines="$(Version)" File="$(BaseOutputPath)\$(Configuration)\ver.txt" Overwrite="true" />
+  </Target>
+
+</Project>
