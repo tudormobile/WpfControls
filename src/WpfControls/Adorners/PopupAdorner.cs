@@ -29,6 +29,7 @@ public class PopupAdorner : GlyphAdorner
     /// </param>
     public PopupAdorner(UIElement adornedElement) : base(adornedElement)
     {
+        this.FontSize = 8;
         this.IsHitTestVisible = true;
         this.Glyph = Popup.GetPopupContent(adornedElement) switch
         {
