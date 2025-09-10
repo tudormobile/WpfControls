@@ -10,7 +10,7 @@ namespace Tudormobile.Wpf.Converters;
 /// <remarks>This converter is typically used in UI scenarios where a <see cref="PlacementMode"/> value  needs to
 /// be visually represented as a glyph. For example, <see cref="PlacementMode.Right"/>  is converted to a right-pointing
 /// caret glyph, while other values default to a down-pointing caret glyph.</remarks>
-public class PlacementToGlyphConverter : IValueConverter
+internal class PlacementToGlyphConverter : IValueConverter
 {
     /// <summary>
     /// Converts a <see cref="PlacementMode"/> value to its corresponding symbol representation.

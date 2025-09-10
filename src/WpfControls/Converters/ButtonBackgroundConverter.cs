@@ -22,7 +22,7 @@ public class ButtonBackgroundConverter : IValueConverter
             if (brush != null) return brush;
 
             var r = b.Clone();
-            r.Opacity = (double)System.Convert.ChangeType(parameter ?? 0, typeof(double));
+            r.Opacity = Math.Clamp((double)System.Convert.ChangeType(parameter ?? 0, typeof(double)), 0.0, 1.0);
             _cache[hash] = r;
             return r;
         }
