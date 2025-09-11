@@ -5,7 +5,7 @@ namespace Tudormobile.Wpf.Commands;
 /// <summary>
 /// This is placeholder command.
 /// </summary>
-public class PlaceholderCommand : ICommand
+internal class PlaceholderCommand : ICommand
 {
     /// <inheritdoc/>
     public event EventHandler? CanExecuteChanged;

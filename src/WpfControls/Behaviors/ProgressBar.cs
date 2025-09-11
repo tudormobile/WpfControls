@@ -53,7 +53,7 @@ public static class ProgressBar
     private static void applyCornerRadius(System.Windows.Controls.ProgressBar p)
     {
         var radius = ProgressBar.GetCornerRadius(p);
-        foreach (var child in EnumerateChildren(p))
+        foreach (var child in enumerateChildren(p))
         {
             if (child is Rectangle r)
             {
@@ -67,13 +67,13 @@ public static class ProgressBar
         }
     }
 
-    private static IEnumerable<DependencyObject> EnumerateChildren(DependencyObject root)
+    private static IEnumerable<DependencyObject> enumerateChildren(DependencyObject root)
     {
         for (int index = 0; index < VisualTreeHelper.GetChildrenCount(root); index++)
         {
             var child = VisualTreeHelper.GetChild(root, index);
             yield return child;
-            foreach (var c in EnumerateChildren(child)) yield return c;
+            foreach (var c in enumerateChildren(child)) yield return c;
         }
     }
 }

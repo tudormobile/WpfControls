@@ -25,7 +25,10 @@ jobs:
       run: dotnet test --logger "trx;LogFilePrefix=output" --collect "Code Coverage" --settings "test.runsettings"
 
     - name: Build
-      run: dotnet build -c Release
+      run: |
+        dotnet build -c Release
+        dotnet build -c Release src/WpfControls/Tudormobile.Wpf.Behaviors.csproj
+        dotnet build -c Release src/WpfControls/Tudormobile.Wpf.Converters.csproj
 
     - name: Unit Test Annotations
       run: |

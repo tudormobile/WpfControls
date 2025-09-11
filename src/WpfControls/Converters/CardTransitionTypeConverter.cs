@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace Tudormobile.Wpf.Controls.Converters;
+namespace Tudormobile.Wpf.Converters;
 
 /// <summary>
 /// Provides a type converter to convert string representations of card transition types into corresponding animations
@@ -12,7 +12,7 @@ namespace Tudormobile.Wpf.Controls.Converters;
 /// <remarks>This converter supports predefined transition types, including "SlideLeft", "SlideRight", "SlideUp",
 /// "SlideDown", and "FadeIn". These transitions are represented as animations that can be used in UI elements. If an
 /// unsupported transition type is provided, an <see cref="ArgumentException"/> is thrown.</remarks>
-public class CardTransitionTypeConverter : TypeConverter
+internal class CardTransitionTypeConverter : TypeConverter
 {
     private static string[] _allowed = ["SlideLeft", "SlideRight", "SlideUp", "SlideDown", "FadeIn"];
 

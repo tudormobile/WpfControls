@@ -205,7 +205,7 @@ public class InlineObjectEditor : ContentControl
             }
             else
             {
-                CancelEventArgs args = new CancelEventArgs();
+                CancelEventArgs args = new();
                 editor.OnClosing(args);
                 if (args.Cancel)
                 {
