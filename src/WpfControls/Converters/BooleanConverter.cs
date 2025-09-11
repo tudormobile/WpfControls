@@ -26,6 +26,11 @@ public class BooleanConverter : IValueConverter
     /// </summary>
     public object? FalseValue { get; set; } = UnsetValue;
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the operation is inverted. (True becomes False and vice versa).
+    /// </summary>
+    public bool IsInverted { get; set; } = false;
+
     /// <inheritdoc/>
     public object? Convert(object value, Type targetType, object? parameter, CultureInfo? culture)
     {
@@ -33,6 +38,7 @@ public class BooleanConverter : IValueConverter
         {
             throw new InvalidOperationException("The value must be a Boolean.");
         }
+        if (IsInverted) value = !(bool)value;
         if ((bool)value && TrueValue != UnsetValue) return TrueValue;
         if (!(bool)value && FalseValue != UnsetValue) return FalseValue;
         return targetType switch
@@ -59,6 +65,12 @@ public class BooleanConverter : IValueConverter
         {
             throw new InvalidOperationException("The target type must be a Boolean.");
         }
+        var result = convertBackInternal(value, targetType);
+        return IsInverted ? !result : result;
+    }
+
+    private bool convertBackInternal(object value, Type targetType)
+    {
         if (TrueValue != UnsetValue && value.Equals(TrueValue)) return true;
         if (FalseValue != UnsetValue && value.Equals(FalseValue)) return false;
         return value switch

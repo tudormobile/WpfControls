@@ -5,6 +5,7 @@ The namespaces available in the *Tudormobile.WpfControls* library are described 
 
 ```
 using Tudormobile.Wpf.Controls;
+using Tudormobile.Wpf.Converters;
 using Tudormobile.Wpf.Behaviors;
 using Tudormobile.Wpf.Adorners;
 ```
@@ -12,6 +13,8 @@ using Tudormobile.Wpf.Adorners;
 - [Tudormobile.Wpf.Controls](Tudormobile.Wpf.Controls.yml)
     - Root namespace for the WpfApp library.  
 This is where you will find all of the custom control provided by the library.
+- [Tudormobile.Wpf.Converters](Tudormobile.Wpf.Converters.yml)
+    - Value and multi-value converters.  
 - [Tudormobile.Wpf.Behaviors](Tudormobile.Wpf.Behaviors.yml)
     - Attached properties and behaviors for framework elements.  
 A number of value converters used by these controls are found here. They may be useful in other scenarios within your applications..

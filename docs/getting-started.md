@@ -11,6 +11,7 @@ dotnet add package Tudormobile.WpfControls
 -or-
 ```
 dotnet add package Tudormobile.Wpf.Behaviors
+dotnet add package Tudormobile.Wpf.Converters
 ```
 
 ### Prerequisites
@@ -22,6 +23,7 @@ dotnet add package Tudormobile.Wpf.Behaviors
 #### Inlcuding library provided services:
 ```
 using Tudormobile.Wpf.Controls;
+using Tudormobnile.Wpf.Converters;
 using Tudormobile.Wpf.Behaviors;
 using Tudormobile.Wpf.Adorners;
 ```
@@ -35,4 +37,5 @@ xmlns:adorners="clr-namespace:Tudormobile.Wpf.Adorners;assembly=Tudormobile.WpfC
 ```
 xmlns:behaviors="clr-namespace:Tudormobile.Wpf.Behaviors;assembly=Tudormobile.Wpf.Behaviors"
 xmlns:adorners="clr-namespace:Tudormobile.Wpf.Adorners;assembly=Tudormobile.Wpf.Behaviors"
+xmlns:converters="clr-namespace:Tudormobile.Wpf.Converters;assembly=Tudormobile.Wpf.Converters"
 ```
