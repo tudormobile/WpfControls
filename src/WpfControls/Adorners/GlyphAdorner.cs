@@ -23,9 +23,19 @@ namespace Tudormobile.Wpf.Adorners;
 /// </remarks>
 public class GlyphAdorner : Adorner
 {
+    private double? _fontSize = null;
     private Thickness? _padding = null;
     private string? _glyph;
     private FormattedText? _formattedText;
+
+    /// <summary>
+    /// Font size for the glyph
+    /// </summary>
+    public double FontSize
+    {
+        get => _fontSize ?? ((AdornedElement as Control)?.FontSize ?? 12) * .75;
+        set { _fontSize = value; }
+    }
 
     /// <summary>
     /// Original padding value
@@ -60,8 +70,7 @@ public class GlyphAdorner : Adorner
                     CultureInfo.CurrentCulture,
                     FlowDirection.LeftToRight,
                     new Typeface("Segoe Fluent Icons"),
-                    //((AdornedElement as Control)?.FontSize ?? 12) * .75,
-                    8,
+                    FontSize,
                     (AdornedElement as Control)?.Foreground ?? Brushes.Black,
                     VisualTreeHelper.GetDpi(this).PixelsPerDip)).Width, _formattedText.Height);
 
@@ -91,7 +100,7 @@ public class GlyphAdorner : Adorner
 
         if (AdornedElement is TextBoxBase tb && !string.IsNullOrEmpty(_glyph))
         {
-            xPos = tb.Padding.Left - GlyphSize.Width;
+            xPos = Math.Max(6, tb.Padding.Left - GlyphSize.Width);
             yPos = tb.ActualHeight / 2 - GlyphSize.Height / 2;
             //drawingContext.DrawText(_formattedText, new Point(xPos, yPos));
         }

@@ -1,9 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows.Controls;
+using Tudormobile.Wpf.Behaviors;
 
 namespace WpfControls.Tests.Behaviors;
 
 [STATestClass, ExcludeFromCodeCoverage]
-public class TextBoxTests
+public class TextBoxExtensionTests
 {
     [STATestMethod]
     public void TextBox_GetSetGlyph()
@@ -31,4 +33,15 @@ public class TextBoxTests
         var autoSelect = Tudormobile.Wpf.Behaviors.TextBox.GetAutoSelect(textBox);
         Assert.IsTrue(autoSelect);
     }
+
+    [STATestMethod]
+    public void TextBox_GetSetAutoComplete()
+    {
+        var expected = new[] { "Apple", "Banana", "Cherry" };
+        var textBox = new System.Windows.Controls.TextBox();
+        Tudormobile.Wpf.Behaviors.TextBox.SetAutoComplete(textBox, expected);
+        var actual = Tudormobile.Wpf.Behaviors.TextBox.GetAutoComplete(textBox);
+        Assert.AreEqual(expected, actual);
+    }
+
 }

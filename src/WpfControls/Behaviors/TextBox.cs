@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Tudormobile.Wpf.Adorners;
@@ -84,6 +86,92 @@ public class TextBox : Behavior<System.Windows.Controls.TextBox>
     /// <param name="obj">The object on which to set the property value.</param>
     /// <param name="value"><c>true</c> to enable auto-select; otherwise, <c>false</c>.</param>
     public static void SetAutoSelect(DependencyObject obj, bool value) => obj.SetValue(AutoSelectProperty, value);
+
+    /// <summary>
+    /// Gets the value of the AutoComplete attached property for the specified TextBox. The value can be a string, 
+    /// enum, or any IEnumerable. Typically, this property is data bound to provide dynamic auto-completion suggestions.
+    /// </summary>
+    /// <param name="obj">The dependency object on which to set the AutoComplete property. Cannot be <see langword="null"/>. 
+    /// Must be a TextBox.
+    /// </param>
+    /// <returns>The current value of the AutoComplete property attached property, or <see langword="null"/> if the
+    /// property is not set.</returns>
+    /// <remarks>
+    /// The AutoComplete property provides auto-completion data for the associated text box. Any IEnumerable can be used
+    /// as the source for auto-completion suggestions. Alternatively, a string can be provided, which will be split into 
+    /// individual suggestions based on a default separator character of '|'. To provide a custom separator, use the
+    /// surround the text with the separator you want to use, for example: ";item1;item2;item3;". If an Enum is used, the
+    /// names of the enum values will be used as suggestions.
+    /// </remarks>
+    public static object? GetAutoComplete(DependencyObject obj) => (object?)obj.GetValue(AutoCompleteProperty);
+
+    /// <summary>
+    /// Sets the value of the AutoComplete property on the specified dependency object. Can be a string, enum, or any IEnumerable.
+    /// Typically, this property is data bound to provide dynamic auto-completion suggestions.
+    /// </summary>
+    /// <param name="obj">The dependency object on which to set the AutoComplete property. Cannot be <see langword="null"/>. 
+    /// Must be a TextBox.
+    /// </param>
+    /// <param name="value">The value to set for the AutoComplete property. Can be <see langword="null"/>.</param>
+    /// <remarks>
+    /// The AutoComplete property provides auto-completion data for the associated text box. Any IEnumerable can be used
+    /// as the source for auto-completion suggestions. Alternatively, a string can be provided, which will be split into 
+    /// individual suggestions based on a default separator character of '|'. To provide a custom separator, use the
+    /// surround the text with the separator you want to use, for example: ";item1;item2;item3;". If an Enum is used, the
+    /// names of the enum values will be used as suggestions.
+    /// </remarks>
+    public static void SetAutoComplete(DependencyObject obj, object? value) => obj.SetValue(AutoCompleteProperty, value);
+
+    /// <inheritdoc/>
+    public static readonly DependencyProperty AutoCompleteProperty = DependencyProperty
+        .RegisterAttached("AutoComplete",
+        typeof(object),
+        typeof(TextBox),
+        new PropertyMetadata(null, autoComplete_Changed));
+
+    private static void autoComplete_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is TextBoxBase textBox)
+        {
+            textBox.TextChanged -= textBox_TextChanged;
+            textBox.TextChanged += textBox_TextChanged;
+        }
+    }
+    private static void textBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (sender is System.Windows.Controls.TextBox textBox)
+        {
+            if (textBox.SelectionLength == 0 &&
+                !textBox.IsReadOnly &&
+                textBox.Text.Length > 0 &&
+                e.Changes.FirstOrDefault(c => c.AddedLength == 1) != null)
+            {
+                // Only do auto-complete if there is no selection active, the text box is not read-only, and
+                // the text length is greater than 0 and a single character was added.
+                var suggestion = getValues(GetAutoComplete(textBox))
+                    .FirstOrDefault(x => x.StartsWith(textBox.Text, StringComparison.InvariantCultureIgnoreCase)); // TODO: Cache values?
+                if (suggestion != null && suggestion.Length > textBox.Text.Length)
+                {
+                    var selStart = textBox.SelectionStart;
+                    textBox.Text = suggestion;
+                    textBox.SelectionStart = selStart;
+                    textBox.SelectionLength = suggestion.Length - selStart;
+                }
+
+            }
+        }
+    }
+
+    private static IEnumerable<String> getValues(object? autoCompleteValue)
+        => autoCompleteValue switch
+        {
+            Type t => t.IsEnum ? Enum.GetNames(t) : [],
+            String s => s.Length > 2 && s[0] == s[^1] && !Char.IsLetterOrDigit(s[0]) ?
+                s.Split(s[0], StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()) :
+                s.Split('|', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()),
+            IEnumerable ie => ie.Cast<object>().Select(x => x.ToString() ?? String.Empty),
+            _ => []
+        };
 
     private static void autoSelectChanged(System.Windows.Controls.TextBox box, DependencyProperty property, bool isLoading)
     {
