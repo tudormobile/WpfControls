@@ -9,7 +9,7 @@ namespace Tudormobile.Wpf.Converters;
 /// to modify the shade. Intended for use with 'Hover' and 'Pressed' effects on buttons. The created
 /// brush is cached.
 /// </summary>
-public class ButtonBackgroundConverter : IValueConverter
+internal class ButtonBackgroundConverter : IValueConverter
 {
     private readonly Dictionary<int, Brush> _cache = [];
     /// <inheritdoc/>

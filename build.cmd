@@ -13,6 +13,7 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 docfx docs/docfx.json
 if %errorlevel% neq 0 exit /b %errorlevel%
 del docs\_site\*.ico
+dotnet build -c Release src/WpfControls/Tudormobile.Wpf.Behaviors.csproj
 powershell -command compress-archive -Path src\WpfControls\bin\release\*.nupkg -Destination package.zip -Force
 set /p ver=<src\WpfControls\bin\release\ver.txt
 echo version=%ver%

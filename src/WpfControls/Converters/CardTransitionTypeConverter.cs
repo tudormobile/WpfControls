@@ -12,7 +12,7 @@ namespace Tudormobile.Wpf.Converters;
 /// <remarks>This converter supports predefined transition types, including "SlideLeft", "SlideRight", "SlideUp",
 /// "SlideDown", and "FadeIn". These transitions are represented as animations that can be used in UI elements. If an
 /// unsupported transition type is provided, an <see cref="ArgumentException"/> is thrown.</remarks>
-public class CardTransitionTypeConverter : TypeConverter
+internal class CardTransitionTypeConverter : TypeConverter
 {
     private static string[] _allowed = ["SlideLeft", "SlideRight", "SlideUp", "SlideDown", "FadeIn"];
 
