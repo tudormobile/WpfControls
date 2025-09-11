@@ -10,7 +10,7 @@ namespace Tudormobile.Wpf.Converters;
 /// based on whether a bound value is null. If the input value is <see langword="null"/>, the method  returns <see
 /// cref="System.Windows.Visibility.Collapsed"/>; otherwise, it returns  <see
 /// cref="System.Windows.Visibility.Visible"/>.</remarks>
-public class NullToVisibilityConverter : IValueConverter
+internal class NullToVisibilityConverter : IValueConverter
 {
     /// <summary>
     /// Converts a value to a <see cref="System.Windows.Visibility"/> enumeration based on its nullability.
