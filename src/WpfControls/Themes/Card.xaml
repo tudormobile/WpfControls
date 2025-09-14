@@ -6,9 +6,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:Card}">
-                    <StackPanel>
-                        <ContentPresenter ContentSource="Header"/>
-                        <Border Background="{TemplateBinding Background}" ClipToBounds="True"
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ContentPresenter Grid.Row="0" ContentSource="Header"/>
+                        <Border Grid.Row="1" 
+                            Background="{TemplateBinding Background}" ClipToBounds="True"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Padding="{TemplateBinding Padding}"
@@ -19,8 +25,8 @@
                                 </ContentPresenter.RenderTransform>
                             </ContentPresenter>
                         </Border>
-                        <ContentPresenter ContentSource="Footer"/>
-                    </StackPanel>
+                        <ContentPresenter Grid.Row="2" ContentSource="Footer"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
