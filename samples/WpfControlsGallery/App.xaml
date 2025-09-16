@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WpfControlsGallery"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             StartupUri="TextBoxWindow.xaml">
+             StartupUri="CardTestWindow.xaml">
     <Application.Resources>
         <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
         <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
