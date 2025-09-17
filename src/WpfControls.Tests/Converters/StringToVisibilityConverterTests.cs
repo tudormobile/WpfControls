@@ -37,7 +37,7 @@ public class StringToVisibilityConverterTests
     {
         var converter = new StringToVisibilityConverter();
         Assert.ThrowsExactly<NotImplementedException>(() =>
-            converter.ConvertBack(Visibility.Visible, typeof(string), null, CultureInfo.InvariantCulture));
+            converter.ConvertBack(Visibility.Visible, typeof(string), "test", CultureInfo.InvariantCulture));
     }
 }
 
