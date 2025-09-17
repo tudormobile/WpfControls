@@ -38,7 +38,7 @@ public class ConfirmParameters : Freezable
 
     /// <summary>
     /// Gets or sets the text displayed on the buttons. Up to three button texts can be defined, separated by the '|' character.
-    /// By default, buttons are labeld "Yes" and "No" ("Yes|No") and displayed right to left. The first letter of each button
+    /// By default, buttons are labeled "Yes" and "No" ("Yes|No") and displayed right to left. The first letter of each button
     /// text is used as the access key (mnemonic) for that button. The first button is considered the "affirmative" action.
     /// </summary>
     public string? ButtonText
