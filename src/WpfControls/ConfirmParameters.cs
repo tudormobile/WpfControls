@@ -160,7 +160,6 @@ public class ConfirmParameters : Freezable
                     if (keyChar == 'c')
                     {
                         WasCancelled = keyChar == 'c'; // only consider it a "cancel" if the key is 'c'
-                        WasCancelled = true;
                     }
                     w.Close();
                 }
