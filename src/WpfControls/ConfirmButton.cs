@@ -1,7 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace Tudormobile.Wpf.Controls;
 
@@ -101,76 +99,24 @@ public class ConfirmButton : Button
     /// </remarks>
     protected override void OnClick()
     {
-        var supressClick = false;
-        var message = Message ?? "Are you sure?";
-        var buttonDefinition = string.IsNullOrWhiteSpace(ButtonText) ? "Yes|No" : ButtonText;
-        var buttons = buttonDefinition.Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        var parameters = new ConfirmParameters()
+        {
+            ButtonText = ButtonText,
+            Message = Message,
+            Command = Command,
+            CommandParameter = CommandParameter,
+        };
         var hostWindow = Window.GetWindow(this);
+        var supressClick = false;
+
         if (hostWindow != null)
         {
-            var brush = hostWindow.Foreground.Clone();
-            brush.Opacity = 0.10;
-            var title = $"{hostWindow.Title} - Confirm";
-#pragma warning disable WPF0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-            var w = new Window
+            supressClick = parameters.ShowDialog(hostWindow);
+            if (parameters.WasCancelled == true)
             {
-                Title = title,
-                Icon = createImage(),
-                SizeToContent = SizeToContent.WidthAndHeight,
-                MinHeight = 160,
-                MinWidth = buttons.Length > 2 ? 400 : 300,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner,
-                ResizeMode = ResizeMode.NoResize,
-                Owner = hostWindow,
-                ThemeMode = hostWindow.ThemeMode,
-#pragma warning restore WPF0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-                Content = createContent(message, buttons.Take(3), brush)
-            };
-            w.MouseLeftButtonDown += (s, e) => w.DragMove();
-            w.KeyDown += (s, e) =>
-            {
-                if (e.Key == System.Windows.Input.Key.Escape)
-                {
-                    w.DialogResult = false;
-                    WasCancelled = true;
-                    RaiseUserCancelledRoutedEvent();
-                    w.Close();
-                }
-                else if (e.Key == System.Windows.Input.Key.Enter)
-                {
-                    w.DialogResult = true;
-                    WasCancelled = false;
-                    w.Close();
-                }
-            };
-            var cancelKeys = buttons.Skip(1).Select(b => b.ToLower()[0]).ToArray();
-            var confirmKey = buttons.FirstOrDefault()?.ToLower()[0];
-            w.TextInput += (s, e) =>
-            {
-                var keyText = e.Text.ToLower();
-                if (keyText.Length == 1)
-                {
-                    var keyChar = keyText[0];
-                    if (cancelKeys.Contains(keyChar))
-                    {
-                        w.DialogResult = false;
-                        if (keyChar == 'c')
-                        {
-                            WasCancelled = keyChar == 'c'; // only consider it a "cancel" if the key is 'c'
-                            WasCancelled = true;
-                            RaiseUserCancelledRoutedEvent();
-                        }
-                        w.Close();
-                    }
-                    else if (keyChar == confirmKey)
-                    {
-                        w.DialogResult = true;
-                        WasCancelled = false;
-                        w.Close();
-                    }
-                }
-            };
-            supressClick = w.ShowDialog() != true;
+                // raise the UserCancelled event
+                RaiseUserCancelledRoutedEvent();
+            }
         }
 
         // finally, if not supressed, perform the click action
@@ -187,104 +133,4 @@ public class ConfirmButton : Button
         RaiseEvent(routedEventArgs);
     }
 
-    private static BitmapSource createImage()
-    {
-        var ff = new FontFamily("Segoe Fluent Icons");
-
-        FrameworkElement frameworkElement = new Grid()
-        {
-            Children =
-            {
-                new TextBlock()
-                {
-                    Text = "\uE91F", // full circle mask
-                    FontSize = 48,
-                    Width = 48,
-                    Height = 48,
-                    Foreground = Brushes.Blue,
-                    FontFamily = ff,
-                    TextAlignment = TextAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                },
-                new TextBlock()
-                {
-                    Text = "\uE897",  // help
-                    FontSize = 36,
-                    Width = 36,
-                    Height = 36,
-                    Foreground = Brushes.White,
-                    FontFamily = ff, FontWeight = FontWeights.SemiBold,
-                    TextAlignment = TextAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                },
-            }
-        };
-
-
-        RenderTargetBitmap renderTargetBitmap = new((int)48, (int)48, 96, 96, PixelFormats.Pbgra32);
-        frameworkElement.Measure(new Size(48, 48));
-        frameworkElement.Arrange(new Rect(0, 0, 48, 48));
-        renderTargetBitmap.Render(frameworkElement);
-        BitmapSource bitmapSource = renderTargetBitmap;
-        return bitmapSource;
-    }
-
-    private static Grid createContent(string message, IEnumerable<string> buttons, Brush buttonBackground)
-    {
-        var tb = new TextBlock()
-        {
-            Text = message,
-            Margin = new Thickness(10),
-            TextWrapping = TextWrapping.Wrap,
-        };
-        var sp = new DockPanel()
-        {
-            Margin = new Thickness(0),
-            Background = buttonBackground,
-            LastChildFill = false,
-        };
-        foreach (var btnText in buttons)
-        {
-            var btn = new Button()
-            {
-                Content = btnText,
-                Width = 90,
-                MinHeight = 24,
-                Margin = new Thickness(5, 10, 5, 10),
-            };
-            btn.Click += (s, e) =>
-            {
-                var w = Window.GetWindow(btn);
-                if (w != null)
-                {
-                    w.DialogResult = btn.IsDefault;
-                    w.Close();
-                }
-            };
-            DockPanel.SetDock(btn, Dock.Right);
-            sp.Children.Add(btn);
-        }
-        var firstButton = sp.Children.OfType<Button>().FirstOrDefault();
-        if (firstButton != null)
-        {
-            firstButton.SetValue(Button.IsDefaultProperty, true);
-            firstButton.Margin = new Thickness(5, 10, 10, 10);
-        }
-        var g = new Grid()
-        {
-            Margin = new Thickness(0),
-            RowDefinitions =
-            {
-                new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
-                new RowDefinition { Height = GridLength.Auto }
-            },
-        };
-
-        // load it up
-        Grid.SetRow(tb, 0);
-        Grid.SetRow(sp, 1);
-        g.Children.Add(tb);
-        g.Children.Add(sp);
-        return g;
-    }
 }

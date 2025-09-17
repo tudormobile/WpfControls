@@ -51,16 +51,16 @@ internal class CardTransitionTypeConverter : TypeConverter
             // For simplicity, we return null. You should replace this with actual conversion logic.
             return str switch
             {
-                "SlideLeft" => createStoryBoard("RenderTransform.X", createDoubleAnimation(100, 0)),
-                "SlideRight" => createStoryBoard("RenderTransform.X", createDoubleAnimation(-100, 0)),
-                "SlideUp" => createStoryBoard("RenderTransform.Y", createDoubleAnimation(100, 0)),
-                "SlideDown" => createStoryBoard("RenderTransform.Y", createDoubleAnimation(-100, 0)),
+                "SlideLeft" => createStoryBoard("Margin", createSlideAnimation(new Thickness(100, 0, -100, 0), new Thickness(0))),
+                "SlideRight" => createStoryBoard("Margin", createSlideAnimation(new Thickness(-100, 0, 100, 0), new Thickness(0))),
+                "SlideUp" => createStoryBoard("Margin", createSlideAnimation(new Thickness(0, 100, 0, -100), new Thickness(0))),
+                "SlideDown" => createStoryBoard("Margin", createSlideAnimation(new Thickness(0, -100, 0, 100), new Thickness(0))),
                 "FadeIn" => createStoryBoard("Opacity", new DoubleAnimation
                 {
                     From = 0,
                     To = 1,
-                    Duration = new Duration(TimeSpan.FromSeconds(1.0)),
-                    EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
+                    Duration = new Duration(TimeSpan.FromSeconds(0.5)),
+                    EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
                 }),
                 _ => throw new ArgumentException($"Transition must be '{string.Join('|', _allowed)}'")
             };

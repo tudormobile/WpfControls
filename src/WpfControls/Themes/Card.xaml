@@ -6,21 +6,28 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:Card}">
-                    <StackPanel>
-                        <ContentPresenter ContentSource="Header"/>
-                        <Border Background="{TemplateBinding Background}" ClipToBounds="True"
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ContentPresenter Grid.Row="0" ContentSource="Header"/>
+                        <Border Grid.Row="1" 
+                            Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            Padding="{TemplateBinding Padding}"
+                            Padding="{TemplateBinding Padding}" Panel.ZIndex="10"
                             CornerRadius="{TemplateBinding CornerRadius}">
-                            <ContentPresenter x:Name="PART_ContentPresenter">
-                                <ContentPresenter.RenderTransform>
-                                    <TranslateTransform />
-                                </ContentPresenter.RenderTransform>
-                            </ContentPresenter>
+                            <!-- Layout container is required to allow ClipToBounds behaviors to work correctly -->
+                            <Grid ClipToBounds="True">
+                                <AdornerDecorator Opacity="{Binding ElementName=PART_ContentPresenter, Path=Opacity}">
+                                    <ContentPresenter x:Name="PART_ContentPresenter"/>
+                                </AdornerDecorator>
+                            </Grid>
                         </Border>
-                        <ContentPresenter ContentSource="Footer"/>
-                    </StackPanel>
+                        <ContentPresenter Grid.Row="2" ContentSource="Footer"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

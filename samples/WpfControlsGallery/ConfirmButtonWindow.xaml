@@ -1,0 +1,51 @@
+﻿<Window x:Class="WpfControlsGallery.ConfirmButtonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfControlsGallery" ThemeMode="Light"
+        xmlns:controls="clr-namespace:Tudormobile.Wpf.Controls;assembly=Tudormobile.WpfControls"
+        xmlns:behaviors="clr-namespace:Tudormobile.Wpf.Behaviors;assembly=Tudormobile.WpfControls"
+        mc:Ignorable="d"
+        Title="ConfirmButtonWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Button Width="180" Margin="10" Content="This is regular button" Click="button_Click"/>
+            <controls:ConfirmButton Width="180" Margin="10" Content="This is ConfirmButton" Click="button_Click"/>
+
+            <Button Width="180" Margin="10" Content="Regular button w/Confirm" Click="button_Click">
+                <behaviors:Button.Confirm>
+                    <controls:ConfirmParameters/>
+                </behaviors:Button.Confirm>
+            </Button>
+
+            <Button Width="180" Margin="10" Content="Regular button w/Confirm" Click="button_Click">
+                <behaviors:Button.Confirm>
+                    <controls:ConfirmParameters ButtonText="OK|Cancel"/>
+                </behaviors:Button.Confirm>
+            </Button>
+
+            <Button Width="180" Margin="10" Content="Regular button w/Confirm" Click="button_Click">
+                <behaviors:Button.Confirm>
+                    <controls:ConfirmParameters
+                        Message="Are you sure you want to delete this item?"
+                        ButtonText="Delete|Don't Delete|Cancel"
+                        Command="{Binding DeleteCommand}"
+                        CommandParameter="this is the item to delete"
+                        />
+                </behaviors:Button.Confirm>
+            </Button>
+            <Button Width="180" Margin="10" Content="Button w/Confirm">
+                <behaviors:Button.Confirm>
+                    <controls:ConfirmParameters
+                        Message="Are you sure you want to delete this item?"
+                        ButtonText="Delete|Don't Delete|Cancel"
+                        Command="{Binding DeleteCommand}"
+                        CommandParameter="filename"
+                        />
+                </behaviors:Button.Confirm>
+            </Button>
+
+        </StackPanel>
+    </Grid>
+</Window>
