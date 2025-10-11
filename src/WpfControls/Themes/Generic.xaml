@@ -15,6 +15,6 @@
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/TitleBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/ToggleSwitch.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/WindowStateControl.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/Wizard.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
 </ResourceDictionary>
