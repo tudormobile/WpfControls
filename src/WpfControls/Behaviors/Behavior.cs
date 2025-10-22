@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Documents;
 
 namespace Tudormobile.Wpf.Behaviors;
@@ -83,12 +84,15 @@ public class Behavior<T> where T : FrameworkElement
                 {
                     element.Loaded += (sender, args) =>
                     {
+                        Debug.WriteLine("Handling Loaded");
                         AdornerLayer layer = AdornerLayer.GetAdornerLayer((T)sender);
 
-                        var adorner = (TAdorner)(layer?.GetAdorners(element)?.FirstOrDefault(a => a is TAdorner)
-                            ?? Activator.CreateInstance(typeof(TAdorner), element))!;
-
-                        layer?.Add(adorner);
+                        var adorner = layer?.GetAdorners(element)?.FirstOrDefault(a => a is TAdorner) as TAdorner;
+                        if (adorner == null)
+                        {
+                            adorner = (TAdorner)Activator.CreateInstance(typeof(TAdorner), element)!;
+                            layer?.Add(adorner);
+                        }
                         updateAdorner(element, adorner);
                     };
                 }
