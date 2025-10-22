@@ -118,9 +118,21 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <StackPanel Orientation="Horizontal" >
-                            <Button Padding="{TemplateBinding Padding}" Style="{StaticResource plainButtonStyle}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" x:Name="minButton" Content="&#xE921;" MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource self}}" MinHeight="{TemplateBinding MinHeight}" ToolTip="Minimize"/>
+                            <Button Padding="{TemplateBinding Padding}" Style="{StaticResource plainButtonStyle}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" x:Name="minButton" Content="&#xE921;" MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource self}}" MinHeight="{TemplateBinding MinHeight}">
+                                <Button.ToolTip>
+                                    <ToolTip FontFamily="Segoe UI">
+                                        <TextBlock Text="Minimize" />
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
                             <Button Padding="{TemplateBinding Padding}" Style="{StaticResource plainButtonStyle}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" x:Name="maxButton" Content="&#xE922;" MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource self}}" MinHeight="{TemplateBinding MinHeight}" />
-                            <Button Padding="{TemplateBinding Padding}" Style="{StaticResource closeButtonStyle}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" x:Name="closeButton" Content="&#xe8bb;" MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource self}}" MinHeight="{TemplateBinding MinHeight}" ToolTip="Close" />
+                            <Button Padding="{TemplateBinding Padding}" Style="{StaticResource closeButtonStyle}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" x:Name="closeButton" Content="&#xe8bb;" MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource self}}" MinHeight="{TemplateBinding MinHeight}">
+                                <Button.ToolTip>
+                                    <ToolTip FontFamily="Segoe UI">
+                                        <TextBlock Text="Close" />
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
