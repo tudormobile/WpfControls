@@ -28,6 +28,21 @@ public partial class Wizard : NavigationWindow
     }
 
     /// <summary>
+    /// True if UI should allow forward navigation.
+    /// </summary>
+    public bool IsForwardButtonEnabled
+    {
+        get { return (bool)GetValue(IsForwardButtonEnabledProperty); }
+        set { SetValue(IsForwardButtonEnabledProperty, value); }
+    }
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    public static readonly DependencyProperty IsForwardButtonEnabledProperty = DependencyProperty
+        .Register(nameof(IsForwardButtonEnabled), typeof(bool), typeof(Wizard), new PropertyMetadata(true));
+
+    /// <summary>
     /// Gets or sets the collection of pages associated with this instance.
     /// </summary>
     /// <remarks>Use this property to access or modify the pages. Changes to the collection will not
@@ -40,7 +55,7 @@ public partial class Wizard : NavigationWindow
 
     /// <inheritdoc/>
     public static readonly DependencyProperty PagesProperty = DependencyProperty
-        .Register("Pages", typeof(IList<Object>), typeof(Wizard), new PropertyMetadata(null));
+        .Register(nameof(Pages), typeof(IList<Object>), typeof(Wizard), new PropertyMetadata(null));
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Wizard"/> class.
@@ -123,7 +138,7 @@ public partial class Wizard : NavigationWindow
 
     private void forwardButton_Click(object sender, RoutedEventArgs e)
     {
-        if (Pages is not null)
+        if (Pages is not null && IsForwardButtonEnabled)
         {
             int currentIndex = Pages?.IndexOf(NavigationService.Content) ?? -1;
             int totalPages = Pages?.Count ?? 0;
