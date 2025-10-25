@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Tudormobile.Wpf.Controls;
 
@@ -19,11 +20,23 @@ namespace WpfControlsGallery
         {
             var wizard = new Wizard();
             wizard.Title = "Test Wizard";
+            wizard.Pages.Add(new TextBlock() { Text = "This is final page", Width = 600, MinWidth = 600 });
             wizard.Pages.Add("First Page");
             wizard.Pages.Add("Second Page");
             wizard.Pages.Add("Third Page");
+            wizard.Navigating += wizard_Navigating;
             var result = wizard.ShowDialog();
             Debug.WriteLine($"Wizard result: {result}; DiaglogResult={wizard.DialogResult}");
+        }
+
+        private void wizard_Navigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
+            if (e.Content == ((Wizard)sender).Pages[1])
+            {
+                MessageBox.Show("You must do something first");
+                // Cancel navigation to second page
+                //e.Cancel = true;
+            }
         }
 
         private void ResizeGrip_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
