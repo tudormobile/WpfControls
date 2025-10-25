@@ -15,19 +15,19 @@
 
             <Button Width="180" Margin="10" Content="Regular button w/Confirm" Click="button_Click">
                 <behaviors:Button.Confirm>
-                    <controls:ConfirmParameters/>
+                    <behaviors:ConfirmParameters/>
                 </behaviors:Button.Confirm>
             </Button>
 
             <Button Width="180" Margin="10" Content="Regular button w/Confirm" Click="button_Click">
                 <behaviors:Button.Confirm>
-                    <controls:ConfirmParameters ButtonText="OK|Cancel"/>
+                    <behaviors:ConfirmParameters ButtonText="OK|Cancel"/>
                 </behaviors:Button.Confirm>
             </Button>
 
             <Button Width="180" Margin="10" Content="Regular button w/Confirm" Click="button_Click">
                 <behaviors:Button.Confirm>
-                    <controls:ConfirmParameters
+                    <behaviors:ConfirmParameters
                         Message="Are you sure you want to delete this item?"
                         ButtonText="Delete|Don't Delete|Cancel"
                         Command="{Binding DeleteCommand}"
@@ -37,7 +37,7 @@
             </Button>
             <Button Width="180" Margin="10" Content="Button w/Confirm">
                 <behaviors:Button.Confirm>
-                    <controls:ConfirmParameters
+                    <behaviors:ConfirmParameters
                         Message="Are you sure you want to delete this item?"
                         ButtonText="Delete|Don't Delete|Cancel"
                         Command="{Binding DeleteCommand}"

@@ -99,7 +99,7 @@ public class ConfirmButton : Button
     /// </remarks>
     protected override void OnClick()
     {
-        var parameters = new ConfirmParameters()
+        var parameters = new Behaviors.ConfirmParameters()
         {
             ButtonText = ButtonText,
             Message = Message,

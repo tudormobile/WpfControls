@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Tudormobile.Wpf.Controls;
+namespace Tudormobile.Wpf.Behaviors;
 
 /// <summary>
 /// Represents a set of parameters used to configure and display a confirmation dialog.
@@ -236,7 +236,7 @@ public class ConfirmParameters : Freezable
         };
         foreach (var btnText in buttons)
         {
-            var btn = new Button()
+            var btn = new System.Windows.Controls.Button()
             {
                 Content = btnText,
                 Width = 90,
@@ -255,10 +255,10 @@ public class ConfirmParameters : Freezable
             DockPanel.SetDock(btn, Dock.Right);
             sp.Children.Add(btn);
         }
-        var firstButton = sp.Children.OfType<Button>().FirstOrDefault();
+        var firstButton = sp.Children.OfType<System.Windows.Controls.Button>().FirstOrDefault();
         if (firstButton != null)
         {
-            firstButton.SetValue(Button.IsDefaultProperty, true);
+            firstButton.SetValue(System.Windows.Controls.Button.IsDefaultProperty, true);
             firstButton.Margin = new Thickness(5, 10, 10, 10);
         }
         var g = new Grid()
