@@ -78,6 +78,16 @@ public partial class Wizard : NavigationWindow
         _resizeGrip = GetTemplateChild("PART_ResizeGrip") as ResizeGrip;
     }
 
+    /// <inheritdoc/>
+    protected override void OnClosed(EventArgs e)
+    {
+        this.Loaded -= wizard_Loaded;
+        this.Navigated -= wizard_Navigated;
+        if (_forwardButton != null)
+            _forwardButton.Click -= forwardButton_Click;
+        base.OnClosed(e);
+    }
+
     private void wizard_Loaded(object sender, RoutedEventArgs e)
     {
         this.Navigated += wizard_Navigated;
@@ -140,8 +150,8 @@ public partial class Wizard : NavigationWindow
     {
         if (Pages is not null && IsForwardButtonEnabled)
         {
-            int currentIndex = Pages?.IndexOf(NavigationService.Content) ?? -1;
-            int totalPages = Pages?.Count ?? 0;
+            int currentIndex = Pages.IndexOf(NavigationService.Content);
+            int totalPages = Pages.Count;
             if (currentIndex >= 0 && currentIndex < totalPages - 1)
             {
                 Navigate(Pages![currentIndex + 1]);

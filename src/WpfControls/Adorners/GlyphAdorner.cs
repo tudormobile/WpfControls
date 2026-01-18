@@ -27,6 +27,7 @@ public class GlyphAdorner : Adorner
     private Thickness? _padding = null;
     private string? _glyph;
     private FormattedText? _formattedText;
+    private Size? _glyphSize;
 
     /// <summary>
     /// Font size for the glyph
@@ -57,6 +58,7 @@ public class GlyphAdorner : Adorner
         {
             _glyph = value;
             _formattedText = null;
+            _glyphSize = null;
         }
     }
 
@@ -66,7 +68,7 @@ public class GlyphAdorner : Adorner
     /// <remarks>The size is calculated based on the glyph's text, font size, and other visual properties of
     /// the adorned element. If the adorned element is a <see cref="Control"/>, its font size and foreground brush are
     /// used in the calculation; otherwise 12pt font with Black text is used.</remarks>
-    public Size GlyphSize => new((_formattedText ??= new FormattedText(_glyph ?? "",
+    public Size GlyphSize => _glyphSize ??= new Size((_formattedText ??= new FormattedText(_glyph ?? "",
                     CultureInfo.CurrentCulture,
                     FlowDirection.LeftToRight,
                     new Typeface("Segoe Fluent Icons"),
@@ -102,20 +104,8 @@ public class GlyphAdorner : Adorner
         {
             xPos = Math.Max(6, tb.Padding.Left - GlyphSize.Width);
             yPos = tb.ActualHeight / 2 - GlyphSize.Height / 2;
-            //drawingContext.DrawText(_formattedText, new Point(xPos, yPos));
         }
-        //else //if (AdornedElement is ButtonBase button && !string.IsNullOrEmpty(_glyph))
-        //{
-        //    var xPos = button.ActualWidth - GlyphSize.Width - 4;
-        //    var yPos = button.ActualHeight / 2 - GlyphSize.Height / 2;
-        //drawingContext.DrawRectangle
-        //    (
-        //        new SolidColorBrush(Color.FromArgb(1, 255, 255, 255)),
-        //        new Pen(new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)), 1),
-        //        new Rect(xPos - 2, 2, GlyphSize.Width + 4, button.ActualHeight - 4)
-        //    );
         drawingContext.DrawText(_formattedText, new Point(xPos - 4, yPos));
-        //}
     }
 
     /// <inheritdoc/>

@@ -101,7 +101,9 @@ public class Card : HeaderedContentControl
             {
                 Transition.Begin(presenter);
             }
-            else if (newContent is FrameworkElement fe && ((UIElement)newContent).RenderTransform is TranslateTransform) //&& fe.RenderTransform is TranslateTransform)
+            else if (newContent is FrameworkElement fe
+                     && fe is UIElement ui
+                     && ui.RenderTransform is TranslateTransform)
             {
                 Transition.Begin(fe);
             }

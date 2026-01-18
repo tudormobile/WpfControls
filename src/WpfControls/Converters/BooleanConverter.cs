@@ -15,7 +15,7 @@ namespace Tudormobile.Wpf.Converters;
 /// </remarks>
 public class BooleanConverter : IValueConverter
 {
-    private static object UnsetValue = new object();    // sentinel representing "not set"
+    private static readonly object UnsetValue = new();    // sentinel representing "not set"
     /// <summary>
     /// Gets or sets the value that represents <see langword="true"/> value when converting.
     /// </summary>

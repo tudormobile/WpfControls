@@ -7,8 +7,8 @@ namespace Tudormobile.Wpf.Controls;
 /// Represents a button control that prompts the user for confirmation before performing the Click action and/or command.
 /// <para>
 /// The default confirmation dialog is a simple message box with "Yes" and "No" options. Use the ButtonText property to
-/// define up to three buttons with custom text, separated by the '|' character. The first button is consider theed
-/// the "affirmative" action, while the second and third buttons are considered "negative" actions. Buttons are placed
+/// define up to three buttons with custom text, separated by the '|' character. The first button is considered the
+/// "affirmative" action, while the second and third buttons are considered "negative" actions. Buttons are placed
 /// from the right to the left in the order they are defined.
 /// </para>
 /// </summary>

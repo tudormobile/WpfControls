@@ -164,7 +164,9 @@ public static class Popup
             uie.MouseUp -= releaseMouseCapture;
             uie.MouseLeave -= releaseMouseCapture;
             ((UIElement)sender).ReleaseMouseCapture();
+#if DEBUG
             Debug.WriteLine("Released");
+#endif
         }
     }
 
