@@ -2,19 +2,18 @@
   <PropertyGroup>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>Tudormobile.Wpf.Behaviors</RootNamespace>
+    <Title>Wpf Behaviors</Title>
     <Product>Tudormobile Wpf Behaviors</Product>
     <Description>Tudormobile WPF Behaviors Library</Description>
     <PackageTags>WPF;WPFControls;Behaviors;Tudormobile;Windows;UI</PackageTags>
   </PropertyGroup>
-
   <ItemGroup>
     <None Include="..\..\docs\README.md" Pack="true" PackagePath="\" />
-    <Compile Remove="*.cs"/>
-    <Compile Remove="Commands/**/*.cs"/>
-    <Compile Remove="Converters/**/*.cs"/>
-    <Compile Remove="Helpers/**/*.cs"/>
-    <Compile Remove="Properties/*"/>
-    <Page Remove="Themes/*.xaml"/>
+    <Compile Remove="*.cs" />
+    <Compile Remove="Commands/**/*.cs" />
+    <Compile Remove="Converters/**/*.cs" />
+    <Compile Remove="Helpers/**/*.cs" />
+    <Compile Remove="Properties/*" />
+    <Page Remove="Themes/*.xaml" />
   </ItemGroup>
-
 </Project>

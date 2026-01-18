@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="samples/WpfControlsGallery/WpfControlsGallery.csproj" />
+  <Project Path="samples/WpfTestApplication/WpfTestApplication.csproj" />
+  <Project Path="src/WpfControls.Tests/WpfControls.Tests.csproj" />
+  <Project Path="src/WpfControls/WpfControls.csproj" />
+</Solution>

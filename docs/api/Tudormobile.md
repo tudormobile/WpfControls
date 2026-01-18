@@ -22,6 +22,5 @@ A number of value converters used by these controls are found here. They may be 
     - Adorner decorators for framework elements.  
 A number of adorner decorators for framework elements are provided. Many of these are used as visual elements for the behaviors described above.  
     
-# Release [!include[version](../../src/WpfControls/bin/release/ver.txt)]
 Latest unit testing results are shown below.
 [!include[summary](../../output/SummaryGithub.md)]

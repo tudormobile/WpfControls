@@ -1,23 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="MSTest.Sdk/4.0.2">
   <PropertyGroup>
-    <TargetFramework>net9.0-windows</TargetFramework>
-    <LangVersion>latest</LangVersion>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="MSTest" Version="4.0.0-preview.25372.6" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WpfControls\WpfControls.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="System.Globalization" />
     <Using Include="Tudormobile.Wpf.Controls" />
     <Using Include="Tudormobile.Wpf.Converters" />

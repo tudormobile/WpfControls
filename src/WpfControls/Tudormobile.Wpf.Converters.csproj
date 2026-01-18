@@ -1,21 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <Title>Wpf Converters</Title>
     <RootNamespace>Tudormobile.Wpf.Converters</RootNamespace>
     <Product>Tudormobile Wpf Converters</Product>
     <Description>Tudormobile WPF Converter Library</Description>
     <PackageTags>WPF;WPFControls;Converters;Tudormobile;Windows;UI</PackageTags>
   </PropertyGroup>
-
   <ItemGroup>
     <None Include="..\..\docs\README.md" Pack="true" PackagePath="\" />
-    <Compile Remove="*.cs"/>
-    <Compile Remove="Adorners/**/*.cs"/>
-    <Compile Remove="Commands/**/*.cs"/>
-    <Compile Remove="Behaviors/**/*.cs"/>
-    <Compile Remove="Helpers/**/*.cs"/>
-    <Compile Remove="Properties/*"/>
-    <Page Remove="Themes/*.xaml"/>
+    <Compile Remove="*.cs" />
+    <Compile Remove="Adorners/**/*.cs" />
+    <Compile Remove="Commands/**/*.cs" />
+    <Compile Remove="Behaviors/**/*.cs" />
+    <Compile Remove="Helpers/**/*.cs" />
+    <Compile Remove="Properties/*" />
+    <Page Remove="Themes/*.xaml" />
   </ItemGroup>
-
 </Project>
