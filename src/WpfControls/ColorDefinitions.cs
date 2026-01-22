@@ -40,7 +40,7 @@ public static class ColorDefinitions
         }
 
         byte a = 255;
-        byte r, g, b;
+        byte r = 0, g = 0, b = 0;
 
         if (span.Length == 8)
         {
