@@ -16,7 +16,7 @@ namespace Tudormobile.Wpf.Controls;
 /// </summary>
 /// <remarks>
 /// You can apply a border, background, and padding to easily stylize the message. The background
-/// is used when the Informational severity is applied, otherwise it is 'tinited' green, yellow,
+/// is used when the Informational severity is applied, otherwise it is 'tinted' green, yellow,
 /// or red according to the severity. The informational background is otherwise transparent.
 /// 
 /// You can attach a Command or handle the Closed event to be signaled when the user dismisses the bar.
@@ -31,7 +31,7 @@ public class InfoBar : Control
     /// <summary>
     /// Closed Routed Event.Raised when the user dismisses the information bar.
     /// <para>
-    /// This even is not raised if the IsClosable property is set to (false). 
+    /// This event is not raised if the IsClosable property is set to (false). 
     /// </para>
     /// </summary>
     public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(

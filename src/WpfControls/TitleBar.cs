@@ -140,7 +140,9 @@ public class TitleBar : ContentControl
     /// <inheritdoc/>
     private void showControlMenu(Point p)
     {
+#if DEBUG
         Debug.WriteLine(p);
+#endif
         var w = Window.GetWindow(this);
         if (w != null)
         {

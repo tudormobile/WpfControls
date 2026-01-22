@@ -84,7 +84,9 @@ public class Behavior<T> where T : FrameworkElement
                 {
                     element.Loaded += (sender, args) =>
                     {
+#if DEBUG
                         Debug.WriteLine("Handling Loaded");
+#endif
                         AdornerLayer layer = AdornerLayer.GetAdornerLayer((T)sender);
 
                         var adorner = layer?.GetAdorners(element)?.FirstOrDefault(a => a is TAdorner) as TAdorner;

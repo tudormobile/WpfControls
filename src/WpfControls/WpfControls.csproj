@@ -1,20 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AssemblyName>Tudormobile.$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>Tudormobile.Wpf.Controls</RootNamespace>
+    <Title>Wpf Controls</Title>
     <Product>Tudormobile WpfControls</Product>
     <Description>Tudormobile WPF Control Library</Description>
     <PackageTags>WPF;WPFControls;Tudormobile;Windows;UI</PackageTags>
   </PropertyGroup>
-
   <ItemGroup>
     <None Include="..\..\docs\README.md" Pack="true" PackagePath="\" />
     <InternalsVisibleTo Include="WpfControls.Tests" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Images\" />
   </ItemGroup>
-
 </Project>

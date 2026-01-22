@@ -135,7 +135,7 @@ public class InlineObjectEditor : ContentControl
         // TODO: This is not the best way to implement the header area. For example,
         // the template can be changed at runtime and/or a custom template would not
         // have the TitleContent element. Work on this later.
-        var title = Template.FindName("TitleContent", this);
+        var title = Template?.FindName("TitleContent", this);
         if (title is TextBlock textBlock)
         {
             textBlock.SetBinding(TextBlock.TextProperty, new Binding(DisplayMemberPath)

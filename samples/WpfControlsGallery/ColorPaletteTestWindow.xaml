@@ -1,0 +1,169 @@
+﻿<Window x:Class="WpfControlsGallery.ColorPaletteTestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfControlsGallery"
+        mc:Ignorable="d"
+        Title="ColorPaletteTestWindow" Height="800" Width="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ItemsControl ItemsSource="{Binding Palettes}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border x:Name="border" Margin="5" Padding="5" BorderThickness="1" CornerRadius="10" BorderBrush="{Binding PrimaryBrush}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Group}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{Binding LightThemeTextBrush}"/>
+                            <Rectangle Width="80" Height="20" Fill="{Binding HorizontalBrush}" Margin="0,5,0,0" Stroke="{Binding PrimaryBrush}" StrokeThickness="0.5"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="170" Fill="{Binding VerticalBrush}" Margin="0,0,0,0" Stroke="{Binding PrimaryBrush}" StrokeThickness="0.5"/>
+                                <StackPanel Orientation="Vertical">
+                                    <ItemsControl ItemsSource="{Binding Brushes}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Rectangle Width="20" Height="20" Fill="{Binding}" Margin="5" Stroke="{Binding BorderBrush, ElementName=border}" StrokeThickness="0.5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <ItemsControl ItemsSource="{Binding Brushes}" Margin="0,5,0,0">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Rectangle Width="50" Height="28" Fill="{Binding}" Margin="5,0,0,0" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding Palettes}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="Black" x:Name="border" Margin="5" Padding="5" BorderThickness="1" CornerRadius="10" BorderBrush="{Binding PrimaryBrush}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Group}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{Binding DarkThemeTextBrush}"/>
+                            <Rectangle Width="80" Height="20" Fill="{Binding HorizontalBrush}" Margin="0,5,0,0" Stroke="{Binding PrimaryBrush}" StrokeThickness="0.5"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="170" Fill="{Binding VerticalBrush}" Margin="0,0,0,0" Stroke="{Binding PrimaryBrush}" StrokeThickness="0.5"/>
+                                <StackPanel Orientation="Vertical">
+                                    <ItemsControl ItemsSource="{Binding Brushes}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Rectangle Width="20" Height="20" Fill="{Binding}" Margin="5" Stroke="{Binding BorderBrush, ElementName=border}" StrokeThickness="0.5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <ItemsControl ItemsSource="{Binding Brushes}" Margin="0,5,0,0">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Rectangle Width="50" Height="28" Fill="{Binding}" Margin="5,0,0,0" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl Grid.Row="2" ItemsSource="{Binding Palettes}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="{Binding ReversedRadialBrush}" x:Name="border" Margin="5" Padding="5" BorderThickness="1" CornerRadius="10" BorderBrush="{Binding PrimaryBrush}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Group}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{Binding LightThemeTextBrush}"/>
+                            <Rectangle Width="80" Height="20" Fill="{Binding HorizontalBrush}" Margin="0,5,0,0" Stroke="{Binding PrimaryBrush}" StrokeThickness="0.5"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="170" Fill="{Binding VerticalBrush}" Margin="0,0,0,0" Stroke="{Binding PrimaryBrush}" StrokeThickness="0.5"/>
+                                <StackPanel Orientation="Vertical">
+                                    <ItemsControl ItemsSource="{Binding Brushes}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Rectangle Width="20" Height="20" Fill="{Binding}" Margin="5" Stroke="{Binding BorderBrush, ElementName=border}" StrokeThickness="0.5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <ItemsControl ItemsSource="{Binding Brushes}" Margin="0,5,0,0">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Rectangle Width="50" Height="28" Fill="{Binding}" Margin="5,0,0,0" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl Grid.Row="3" ItemsSource="{Binding Palettes}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="{Binding RadialBrush}" x:Name="border" Margin="5" Padding="5" BorderThickness="1" CornerRadius="10" BorderBrush="{Binding PrimaryBrush}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Group}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{Binding DarkThemeTextBrush}"/>
+                            <Rectangle Width="80" Height="20" Fill="{Binding HorizontalBrush}" Margin="0,5,0,0" Stroke="{Binding PrimaryBrush}" StrokeThickness="0.5"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="170" Fill="{Binding VerticalBrush}" Margin="0,0,0,0" Stroke="{Binding PrimaryBrush}" StrokeThickness="0.5"/>
+                                <StackPanel Orientation="Vertical">
+                                    <ItemsControl ItemsSource="{Binding Brushes}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Rectangle Width="20" Height="20" Fill="{Binding}" Margin="5" Stroke="{Binding BorderBrush, ElementName=border}" StrokeThickness="0.5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <ItemsControl ItemsSource="{Binding Brushes}" Margin="0,5,0,0">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Rectangle Width="50" Height="28" Fill="{Binding}" Margin="5,0,0,0" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Window>
