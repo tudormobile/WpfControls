@@ -39,26 +39,29 @@ public class BarChart : Chart
         {
             var skipCount = values.Count > allowedPoints
                 ? (int)(values.Count / allowedPoints)
-                : 0;
+                : 1;
             var maxValue = values.Max();
 
-            foreach (var (index, value) in values.Index().Where(x => x.Index % (skipCount) == 0).Index())
+            if (maxValue > 0)
             {
-                var xPos = left + index * (minWidth + spacing);
-                if (xPos + minWidth > left + root.ActualWidth)
+                foreach (var (index, value) in values.Index().Where(x => x.Index % (skipCount) == 0).Index())
                 {
-                    break;
+                    var xPos = left + index * (minWidth + spacing);
+                    if (xPos + minWidth > left + root.ActualWidth)
+                    {
+                        break;
+                    }
+                    var height = (value.Item / maxValue) * root.ActualHeight;
+                    var rect = new Rect(
+                        xPos,
+                        top + root.ActualHeight - height,
+                        minWidth,
+                        height);
+                    drawingContext.DrawRoundedRectangle(
+                        TintBrush,
+                        null,
+                        rect, 4, 4);
                 }
-                var height = (value.Item / maxValue) * root.ActualHeight;
-                var rect = new Rect(
-                    xPos,
-                    top + root.ActualHeight - height,
-                    minWidth,
-                    height);
-                drawingContext.DrawRoundedRectangle(
-                    TintBrush,
-                    null,
-                    rect, 4, 4);
             }
         }
     }

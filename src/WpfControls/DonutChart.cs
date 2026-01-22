@@ -131,7 +131,6 @@ public class DonutChart : Chart
 
             var top = Math.Max(this.ActualHeight - root.ActualHeight, 0) / 2;
             var left = Math.Max(this.ActualWidth - root.ActualWidth, 0) / 2;
-            var pen = new Pen(TintBrush, 1.0);
             var rMax = Math.Min(root.ActualWidth, root.ActualHeight) / 2;
             var rMin2 = Math.Max(presenter.ActualHeight / 2, presenter.ActualWidth / 2);
             var rMin = Math.Max(Math.Min(0.7 * rMax, rMin2), 0.5 * rMax);  // 70 percent inner radius for donut hole (or less)
@@ -149,6 +148,10 @@ public class DonutChart : Chart
             if (slices != null)
             {
                 var total = slices.Sum();
+                if (total <= 0)
+                {
+                    return;
+                }
                 foreach (var (index, slice) in slices.Index())
                 {
                     var sweepAngle = (double)(slice / total) * 360.0;
@@ -220,7 +223,7 @@ public class DonutChart : Chart
                         _ => ""
                     };
                     var formattedText = new FormattedText(
-                        $"{label:F0} ({percentage:F1}%)",
+                        $"{label}({percentage:F1}%)",
                         CultureInfo.InvariantCulture,
                         FlowDirection.LeftToRight,
                         new Typeface("Arial"),

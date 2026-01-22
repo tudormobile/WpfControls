@@ -82,9 +82,14 @@ public partial class Wizard : NavigationWindow
     protected override void OnClosed(EventArgs e)
     {
         this.Loaded -= wizard_Loaded;
-        this.Navigated -= wizard_Navigated;
+        if (this.Navigated != null)
+        {
+            this.Navigated -= wizard_Navigated;
+        }
         if (_forwardButton != null)
+        {
             _forwardButton.Click -= forwardButton_Click;
+        }
         base.OnClosed(e);
     }
 

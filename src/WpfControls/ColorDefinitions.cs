@@ -50,7 +50,7 @@ public static class ColorDefinitions
             g = byte.Parse(span[4..6], NumberStyles.HexNumber);
             b = byte.Parse(span[6..8], NumberStyles.HexNumber);
         }
-        else
+        else if (span.Length == 6)
         {
             // RGB format
             r = byte.Parse(span[..2], NumberStyles.HexNumber);
