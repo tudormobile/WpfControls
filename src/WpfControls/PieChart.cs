@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Tudormobile.Wpf.Controls.Helpers;
 
 namespace Tudormobile.Wpf.Controls;
 
@@ -13,25 +12,6 @@ namespace Tudormobile.Wpf.Controls;
 public class PieChart : Chart
 {
     private FrameworkElement? _rootElement;
-    private Brush[]? _brushPalette;
-
-    /// <summary>
-    /// Gets or sets the data series to be displayed in the pie chart.
-    /// </summary>
-    public ChartSeries Series
-    {
-        get { return (ChartSeries)GetValue(SeriesProperty); }
-        set { SetValue(SeriesProperty, value); }
-    }
-
-    /// <summary>
-    /// Identifies the <see cref="Series"/> dependency property.
-    /// </summary>
-    public static readonly DependencyProperty SeriesProperty = DependencyProperty
-        .Register(nameof(Series),
-        typeof(ChartSeries),
-        typeof(PieChart),
-        new PropertyMetadata(null, OnSeriesChanged));
 
     static PieChart()
     {
@@ -54,15 +34,13 @@ public class PieChart : Chart
         var values = Series?.DataPoints;
         if (values != null)
         {
-            // Generate harmonious color palette from tint
-            var colors = ColorHelpers.GenerateColorPalette(Tint, values.Count);
+            var colors = TintBrushes;
 
             var top = Math.Max(this.ActualHeight - root.ActualHeight, 0) / 2;
             var left = Math.Max(this.ActualWidth - root.ActualWidth, 0) / 2;
             var pen = new Pen(TintBrush, 1.0);
             var r = Math.Min(root.ActualWidth, root.ActualHeight) / 2;
             var p = new Point(left + root.ActualWidth / 2, top + root.ActualHeight / 2);
-            drawingContext.DrawEllipse(Brushes.LightGray, pen, p, r, r);
             var slices = this.Series switch
             {
                 LabelledSeries ls => ls.DataPoints,
@@ -75,6 +53,7 @@ public class PieChart : Chart
             if (slices != null)
             {
                 var total = slices.Sum();
+                var labels = new List<(FormattedText text, Point position)>();
                 foreach (var (index, slice) in slices.Index())
                 {
                     var sweepAngle = (double)(slice / total) * 360.0;
@@ -120,55 +99,40 @@ public class PieChart : Chart
 
                     drawingContext.DrawGeometry(filledArc.Fill, new Pen(filledArc.Stroke, filledArc.StrokeThickness), pathGeometry);
 
-                    // draw the text label
-                    var midAngle = startAngle + sweepAngle / 2;
-                    var labelRadius = r * 0.6; // position label at 60% of radius
-                    var labelPoint = new Point(
-                        p.X + labelRadius * Math.Cos(midAngle * Math.PI / 180.0),
-                        p.Y + labelRadius * Math.Sin(midAngle * Math.PI / 180.0));
-                    var percentage = (slice / total) * 100;
+                    // Compute the text label
                     var label = Series switch
                     {
                         LabelledSeries ls => (index < ls.Labels.Count) ? ls.Labels[index] : "",
                         _ => ""
                     };
-                    var formattedText = new FormattedText(
-                        $"{label:F0} ({percentage:F1}%)",
-                        CultureInfo.InvariantCulture,
-                        FlowDirection.LeftToRight,
-                        new Typeface("Arial"),
-                        9,
-                        Brushes.Black,
-                        VisualTreeHelper.GetDpi(this).PixelsPerDip);
-
-                    // Draw the text label
-                    drawingContext.DrawText(formattedText, labelPoint);
-
+                    if (label.Trim().Length > 0)
+                    {
+                        // Calculate the position for the label
+                        var midAngle = startAngle + sweepAngle / 2;
+                        var labelRadius = r * 0.7; // position label at 70% of radius
+                        var labelPoint = new Point(
+                            p.X + labelRadius * Math.Cos(midAngle * Math.PI / 180.0),
+                            p.Y + labelRadius * Math.Sin(midAngle * Math.PI / 180.0));
+                        var percentage = (slice / total) * 100;
+                        var formattedText = new FormattedText(
+                            $"{label:F0} ({percentage:F1}%)",
+                            CultureInfo.InvariantCulture,
+                            FlowDirection.LeftToRight,
+                            new Typeface("Arial"),
+                            8,
+                            Brushes.Black,
+                            VisualTreeHelper.GetDpi(this).PixelsPerDip);
+                        labels.Add((formattedText, labelPoint));
+                    }
                     // Update the starting angle for the next slice
                     startAngle += sweepAngle;
+                }
+                // Draw all labels
+                foreach (var (text, position) in labels)
+                {
+                    drawingContext.DrawText(text, position);
                 }
             }
         }
     }
-    private static void OnSeriesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not PieChart chart) return;
-
-        //// Unsubscribe from old series
-        //if (e.OldValue is ChartSeries oldSeries && oldSeries.DataPoints is INotifyCollectionChanged oldCollection)
-        //{
-        //    oldCollection.CollectionChanged -= chart.OnDataPointsChanged;
-        //}
-
-        //// Subscribe to new series
-        //if (e.NewValue is ChartSeries newSeries && newSeries.DataPoints is INotifyCollectionChanged newCollection)
-        //{
-        //    newCollection.CollectionChanged += chart.OnDataPointsChanged;
-        //}
-
-        // Trigger re-render
-        chart._brushPalette = null;
-        chart.InvalidateVisual();
-    }
-
 }

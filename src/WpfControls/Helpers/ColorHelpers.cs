@@ -2,47 +2,17 @@
 
 namespace Tudormobile.Wpf.Controls.Helpers;
 
+/// <summary>
+/// Helpers for working with Colors.
+/// </summary>
 internal static class ColorHelpers
 {
     /// <summary>
-    /// Generates a harmonious color palette based on the tint color using HSL color space.
+    /// Converts an HTML color string to a Color object.
     /// </summary>
-    /// <param name="baseTint">The base color to derive the palette from.</param>
-    /// <param name="count">The number of colors to generate.</param>
-    /// <returns>An array of brushes with evenly distributed hues.</returns>
-    internal static Brush[] GenerateColorPalette(Color baseTint, int count)
-    {
-        if (count <= 0)
-            return [];
-
-        if (count == 1)
-            return [new SolidColorBrush(baseTint)];
-
-        // Convert base color to HSL
-        ColorToHsl(baseTint, out double h, out double s, out double l);
-
-        var brushes = new Brush[count];
-
-        // Define the range for lightness variation (subtle shades)
-        var lightnessMin = Math.Max(0.25, l - 0.25);  // Don't go too dark
-        var lightnessMax = Math.Min(0.85, l + 0.25);  // Don't go too light
-        var lightnessStep = (lightnessMax - lightnessMin) / (count - 1);
-
-        for (int i = 0; i < count; i++)
-        {
-            // Keep the same hue, vary lightness for subtle shades
-            var lightness = lightnessMin + (i * lightnessStep);
-
-            // Slightly adjust saturation for depth (optional)
-            var saturation = s * (0.85 + (i * 0.15 / count)); // Subtle saturation variance
-            saturation = Math.Clamp(saturation, 0.4, 1.0);
-
-            var color = HslToColor(h, saturation, lightness);
-            brushes[i] = new SolidColorBrush(color);
-        }
-
-        return brushes;
-    }
+    /// <param name="htmlColor"></param>
+    /// <returns></returns>
+    public static Color FromHtml(string htmlColor) => ColorDefinitions.FromHtml(htmlColor);
 
     /// <summary>
     /// Converts an RGB color to HSL color space.
@@ -51,7 +21,7 @@ internal static class ColorHelpers
     /// <param name="h">Hue (0-360).</param>
     /// <param name="s">Saturation (0-1).</param>
     /// <param name="l">Lightness (0-1).</param>
-    private static void ColorToHsl(Color color, out double h, out double s, out double l)
+    public static void ColorToHsl(Color color, out double h, out double s, out double l)
     {
         double r = color.R / 255.0;
         double g = color.G / 255.0;
@@ -93,7 +63,7 @@ internal static class ColorHelpers
     /// <param name="s">Saturation (0-1).</param>
     /// <param name="l">Lightness (0-1).</param>
     /// <returns>The RGB color.</returns>
-    private static Color HslToColor(double h, double s, double l)
+    public static Color HslToColor(double h, double s, double l)
     {
         h = h / 360.0;
 
@@ -125,7 +95,7 @@ internal static class ColorHelpers
     /// <param name="q">The calculated lightness value.</param>
     /// <param name="t">The hue component.</param>
     /// <returns>The RGB component value (0-1).</returns>
-    private static double HueToRgb(double p, double q, double t)
+    public static double HueToRgb(double p, double q, double t)
     {
         if (t < 0) t += 1;
         if (t > 1) t -= 1;

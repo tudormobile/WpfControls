@@ -15,19 +15,30 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <controls:PieChart x:Name="pieChart" Series="{Binding PieChartData}"
+        <!-- PieChart, purple tint -->
+        <controls:PieChart Series="{Binding PieChartData}"
                            Title="Simple Pie Chart"
                            Margin="0" Padding="20"
-                           Grid.Row="0" Tint="DarkBlue"
+                           Grid.Row="0" Tint="Purple"
                            Grid.Column="1"/>
-        <controls:BarChart x:Name="barChart" Series="{Binding BarChartData}"
+        <!-- BarChart, default tint -->
+        <controls:BarChart Series="{Binding BarChartData}"
                            Title="Simple Bar Chart"
                            Margin="0" Padding="20"
                            Grid.Row="1"
                            Grid.Column="1"/>
 
+        <!-- DonutChart, turquoise tint -->
+        <controls:DonutChart Series="{Binding DonutChartData}"
+                           Title="Simple Donut Chart" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                           Margin="0" Padding="0" Tint="Turquoise"
+                           Grid.Row="2" Content="$1.23M"
+                           Grid.Column="1"/>
+
         <ListBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding PieChartData.DataPoints}"/>
         <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding BarChartData.DataPoints}"/>
+        <ListBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding DonutChartData.DataPoints}"/>
     </Grid>
 </Window>

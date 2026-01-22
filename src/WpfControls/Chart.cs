@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -12,31 +13,54 @@ namespace Tudormobile.Wpf.Controls;
 /// binding, styling, and animation through its dependency property implementation.</remarks>
 public class Chart : Control
 {
-    private Brush? _tintBrush;
-
-    /// <summary>
-    /// Gets or sets the brush used to apply a color tint to the control's content.
-    /// </summary>
-    public Color Tint
-    {
-        get { return (Color)GetValue(TintProperty); }
-        set { SetValue(TintProperty, value); _tintBrush = null; }
-    }
+    private ColorPalette? _colorPalette;
 
     /// <summary>
     /// Gets a brush that applies the current tint color.
     /// </summary>
     /// <remarks>The returned brush is created with the current value of the Tint property. Each access
     /// returns a new SolidColorBrush instance.</remarks>
-    public Brush TintBrush => _tintBrush ??= new SolidColorBrush(Tint);
+    public Brush TintBrush => (_colorPalette ??= new ColorPalette(Tint)).PrimaryBrush;
+
+    /// <summary>
+    /// Collection of brushes from the current color palette.
+    /// </summary>
+    protected Brush[] TintBrushes => (_colorPalette ??= new ColorPalette(Tint)).Brushes;
+
+    /// <summary>
+    /// Gets or sets the brush used to apply a color tint to the control's content.
+    /// </summary>
+    public ColorPalette.ColorGroup Tint
+    {
+        get { return (ColorPalette.ColorGroup)GetValue(TintProperty); }
+        set { SetValue(TintProperty, value); _colorPalette = null; }
+    }
 
     /// <summary>
     /// Identifies the Tint dependency property.
     /// </summary>
     public static readonly DependencyProperty TintProperty = DependencyProperty
         .Register(nameof(Tint),
-        typeof(Color),
-        typeof(Chart), new PropertyMetadata(null));
+        typeof(ColorPalette.ColorGroup),
+        typeof(Chart), new PropertyMetadata(default));
+
+    /// <summary>
+    /// Gets or sets the data series to be displayed in the pie chart.
+    /// </summary>
+    public ChartSeries Series
+    {
+        get { return (ChartSeries)GetValue(SeriesProperty); }
+        set { SetValue(SeriesProperty, value); }
+    }
+
+    /// <summary>
+    /// Identifies the <see cref="Series"/> dependency property.
+    /// </summary>
+    public static readonly DependencyProperty SeriesProperty = DependencyProperty
+        .Register(nameof(Series),
+        typeof(ChartSeries),
+        typeof(Chart),
+        new PropertyMetadata(null, SeriesChanged));
 
     /// <summary>
     /// Gets or sets the title of the chart.
@@ -56,6 +80,46 @@ public class Chart : Control
         typeof(string),
         typeof(Chart),
         new PropertyMetadata(null));
+
+    /// <summary>
+    /// The data series dependency property has changed.
+    /// </summary>
+    /// <param name="args">An object that contains the event data for the dependency property change.</param>
+    /// <remarks>
+    /// Override this method to perform custom actions when the data series changes. You do not need to call
+    /// the base implementation.
+    /// </remarks>
+    protected virtual void OnSeriesChanged(DependencyPropertyChangedEventArgs args) { }
+
+    /// <summary>
+    /// Handles the event that occurs when the collection of data points changes.
+    /// </summary>
+    /// <param name="sender">The source of the event, typically the collection whose contents have changed. This value can be null.</param>
+    /// <param name="e">An object that contains information about the collection change event.</param>
+    protected virtual void OnDataPointsChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        this.InvalidateVisual();
+    }
+
+    private static void SeriesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not Chart chart) return;
+        // Unsubscribe from old series
+        if (e.OldValue is ChartSeries oldSeries && oldSeries.DataPoints is INotifyCollectionChanged oldCollection)
+        {
+            oldCollection.CollectionChanged -= chart.OnDataPointsChanged;
+        }
+
+        // Subscribe to new series
+        if (e.NewValue is ChartSeries newSeries && newSeries.DataPoints is INotifyCollectionChanged newCollection)
+        {
+            newCollection.CollectionChanged += chart.OnDataPointsChanged;
+        }
+
+        // Trigger re-render
+        chart.InvalidateVisual();
+        chart.OnSeriesChanged(e);
+    }
 }
 
 /// <summary>

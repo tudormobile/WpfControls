@@ -11,24 +11,6 @@ public class BarChart : Chart
 {
     private FrameworkElement? _rootElement;
 
-    /// <summary>
-    /// Gets or sets the data series to be displayed in the chart.
-    /// </summary>
-    public ChartSeries Series
-    {
-        get { return (ChartSeries)GetValue(SeriesProperty); }
-        set { SetValue(SeriesProperty, value); }
-    }
-
-    /// <summary>
-    /// Identifies the <see cref="Series"/> dependency property.
-    /// </summary>
-    public static readonly DependencyProperty SeriesProperty = DependencyProperty
-        .Register(nameof(Series),
-        typeof(ChartSeries),
-        typeof(BarChart),
-        new PropertyMetadata(null, OnSeriesChanged));
-
     static BarChart()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(BarChart), new FrameworkPropertyMetadata(typeof(BarChart)));
@@ -74,33 +56,12 @@ public class BarChart : Chart
                     minWidth,
                     height);
                 drawingContext.DrawRoundedRectangle(
-                    Brushes.Blue,
+                    TintBrush,
                     null,
                     rect, 4, 4);
             }
         }
     }
-
-    private static void OnSeriesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not BarChart chart) return;
-
-        //// Unsubscribe from old series
-        //if (e.OldValue is ChartSeries oldSeries && oldSeries.DataPoints is INotifyCollectionChanged oldCollection)
-        //{
-        //    oldCollection.CollectionChanged -= chart.OnDataPointsChanged;
-        //}
-
-        //// Subscribe to new series
-        //if (e.NewValue is ChartSeries newSeries && newSeries.DataPoints is INotifyCollectionChanged newCollection)
-        //{
-        //    newCollection.CollectionChanged += chart.OnDataPointsChanged;
-        //}
-
-        // Trigger re-render
-        chart.InvalidateVisual();
-    }
-
 }
 
 

@@ -8,6 +8,7 @@
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/AppWindow.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/BarChart.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/Card.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/DonutChart.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/FontIcon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/InfoBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Tudormobile.WpfControls;component/Themes/InlineObjectEditor.xaml" />

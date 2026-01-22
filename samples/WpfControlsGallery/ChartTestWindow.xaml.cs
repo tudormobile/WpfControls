@@ -8,12 +8,19 @@ namespace WpfControlsGallery
     /// </summary>
     public partial class ChartTestWindow : Window
     {
+        public ChartSeries DonutChartData { get; set; }
         public ChartSeries PieChartData { get; set; }
         public ChartSeries BarChartData { get; set; }
         public ChartTestWindow()
         {
             InitializeComponent();
             DataContext = this;
+
+            DonutChartData = new ChartSeries()
+            {
+                Name = "Donut Data",
+                DataPoints = [234.56, 789.12, 3456.78, 912.34, 1234.56]
+            };
 
             PieChartData = new LabelledSeries
             {
@@ -34,7 +41,7 @@ namespace WpfControlsGallery
             for (int i = 0; i < 500; i++)
             {
                 BarChartData.DataPoints.Add(balance);
-                balance = balance + random.NextDouble() * 500;
+                balance += random.NextDouble() * 500;
             }
 
 
