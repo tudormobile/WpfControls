@@ -3,7 +3,7 @@
 
 [![Build and Deploy](https://github.com/tudormobile/WpfControls/actions/workflows/dotnet.yml/badge.svg)](https://github.com/tudormobile/WpfControls/actions/workflows/dotnet.yml)  [![Publish Docs](https://github.com/tudormobile/WpfControls/actions/workflows/docs.yml/badge.svg)](https://github.com/tudormobile/WpfControls/actions/workflows/docs.yml)  
 
-Copyright (C) 2025 Tudormobile LLC  
+Copyright (C) 2025 Bill Tudor  
 
 A collection of controls, converters, behaviors, and commands for developing user interfaces for Windows applications within the WPF framework.
 
